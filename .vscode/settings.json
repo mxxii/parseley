@@ -1,0 +1,16 @@
+{
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "files.exclude": {
+      "node_modules/": true,
+      "**/grammar.js": true,
+      "package-lock.json":true
+    },
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "json",
+      "jsonc",
+      "json5"
+    ]
+  }

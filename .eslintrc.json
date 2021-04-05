@@ -1,0 +1,51 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:jsdoc/recommended",
+    "plugin:jsonc/auto-config",
+    "plugin:jsonc/recommended-with-jsonc"
+  ],
+  "ignorePatterns": [
+    ".vscode",
+    "node_modules",
+    "package-lock.json",
+    "**/grammar.js"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "plugins": [
+    "jsdoc",
+    "jsonc"
+  ],
+  "rules": {
+    "eol-last": "error",
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "no-trailing-spaces": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "quote-props": ["error", "consistent"],
+    "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "semi": ["error", "always"],
+
+    "jsdoc/check-indentation": "error",
+    "jsdoc/check-syntax": "error",
+    "jsdoc/require-description-complete-sentence": "error",
+    "jsdoc/require-hyphen-before-param-description": ["error", "never"],
+    "jsdoc/require-jsdoc": ["error", { "publicOnly": true }],
+    "jsdoc/require-returns-description": "off",
+
+    "jsonc/array-bracket-newline": ["error", "consistent"],
+    "jsonc/array-element-newline": ["error", "consistent"]
+  },
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "parser": "jsonc-eslint-parser"
+    }
+  ]
+}
