@@ -12,7 +12,7 @@
 
 ## Goals / features
 
-* Convers CSS selector strings into objects that are easy to work with;
+* Convert CSS selector strings into objects that are easy to work with;
 
 * Serialize back if needed;
 
@@ -42,14 +42,15 @@ These are great but only as long as it doesn't come in conflict with actual goal
 ## Usage example
 
 ```js
-const { parse1, serialize } = require('parseley');
+const parseley = require('parseley');
+const util = require('util');
 
 const str = 'div#id1 > .class1[attr1]';
 
-const ast = parse1(str);
+const ast = parseley.parse1(str);
 console.log(util.inspect(ast, { breakLength: 45, depth: null }));
 
-const serialized = serialize(ast);
+const serialized = parseley.serialize(ast);
 console.log(`Serialized: '${serialized}'`);
 ```
 
@@ -114,11 +115,39 @@ and always returns an AST starting from a node of type `compound`.
 Convert a selector AST back to a string representation.
 
 Note: formatting is not preserved in the AST.
-Output can be considered as normalized.
 
 | Param | Type     | Description
 | ----- | -------- | -----------
 | ast   | `object` | An AST object.
+
+### `sort(ast)`
+
+Modifies the given AST **in place** to have all internal arrays
+in a stable order. Returns the AST.
+
+Intended for consitent processing and normalized `serialize()` output.
+
+| Param | Type     | Description
+| ----- | -------- | -----------
+| ast   | `object` | An AST object.
+
+### `compareArrays(a, b)`
+
+Comparator function with the following criterion:
+
+Array elements with the same index are compared
+one by one from the beginning.
+First non-equal result is returned.
+After the length of the shorter array is reached
+without finding a difference - array lengths are compared.
+
+Can be used to compare specificity values without reducing them
+as arbitrary base numbers.
+
+| Param | Type     | Description
+| ----- | -------- | -----------
+| a     | `Array`  | First array.
+| b     | `Array`  | Second array.
 
 
 ## Motivation and inspiration

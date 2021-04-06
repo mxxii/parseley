@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.6.0
+
+Added `sort` and `compareArrays` functions.
+
 ## Version 0.5.0
 
 Initial release.
