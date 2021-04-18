@@ -3,6 +3,7 @@ import pkg from './package.json';
 
 export default [
   {
+    external: [ 'moo', 'nearley' ],
     input: 'src/parseley.ts',
     plugins: [typescript()],
     output: [
