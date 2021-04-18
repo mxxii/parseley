@@ -1,6 +1,6 @@
-const test = require('ava');
+import test from 'ava';
 
-const { parse, parse1 } = require('../lib/parseley');
+import { parse, parse1 } from '../src/parseley';
 
 test('should produce equal AST inside a list and without a list', t => {
   const input = 'p > a';

@@ -1,8 +1,12 @@
-const test = require('ava');
+import test, {ExecutionContext} from 'ava';
 
-const { parse, serialize } = require('../lib/parseley');
+import { parse, serialize } from '../src/parseley';
 
-function serializeMacro(t, input, expected) {
+function serializeMacro(
+  t: ExecutionContext,
+  input: string,
+  expected: string
+) {
   t.is(serialize(parse(input)), expected);
 }
 

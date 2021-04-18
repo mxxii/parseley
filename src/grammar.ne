@@ -1,5 +1,8 @@
+@preprocessor typescript
+
 @{%
-const moo = require('moo');
+import * as moo from 'moo';
+import { Specificity } from './ast';
 
 const lexer = moo.compile({
   ws:         { match: /[ \t\r\n\f]+/, lineBreaks: true },
@@ -24,9 +27,24 @@ const lexer = moo.compile({
 //rpar:       ')',
 });
 
-const firstTokenValue = ([{value: v}]) => v;
-const second = ([, v]) => v;
-const sumSpec = ([a0, a1, a2], [b0, b1, b2]) => [a0+b0, a1+b1, a2+b2];
+interface mooToken {
+  value: string
+};
+
+function firstTokenValue (tokens: unknown[]): string {
+  return (tokens[0] as mooToken).value;
+}
+
+function second (tokens: unknown[]): unknown {
+  return tokens[1];
+}
+
+function sumSpec (
+  [a0, a1, a2]: Specificity,
+  [b0, b1, b2]: Specificity
+): Specificity {
+  return [a0+b0, a1+b1, a2+b2];
+}
 %}
 
 @lexer lexer
@@ -43,13 +61,13 @@ complexSelector  -> compoundSelector                                {% id %}
                   | complexSelector __ compoundSelector             {%
                       ([left,,right]) => ({
                         type:        'compound',
-                        list:        [...right.list, { type:'combinator', combinator:' ', left:left }],
+                        list:        [...right.list, { type:'combinator', combinator:' ', left:left, specificity:left.specificity }],
                         specificity: sumSpec(left.specificity, right.specificity)
                       }) %}
                   | complexSelector _ combinator _ compoundSelector {%
                       ([left,,c,,right]) => ({
                         type:        'compound',
-                        list:        [...right.list, { type:'combinator', combinator:c, left:left }],
+                        list:        [...right.list, { type:'combinator', combinator:c, left:left, specificity:left.specificity }],
                         specificity: sumSpec(left.specificity, right.specificity)
                       }) %}
 

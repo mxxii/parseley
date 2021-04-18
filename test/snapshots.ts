@@ -1,15 +1,15 @@
-const test = require('ava');
+import test, {ExecutionContext} from 'ava';
 
-const { parse, parse1 } = require('../lib/parseley');
+import { parse, parse1 } from '../src/parseley';
 
-function snapshotMacro(t, input) {
+function snapshotMacro(t: ExecutionContext, input: string) {
   t.snapshot(
     parse(input),
     `\`parse('${input}')\``
   );
 }
 
-function snapshotMacro1(t, input) {
+function snapshotMacro1(t: ExecutionContext, input: string) {
   t.snapshot(
     parse1(input),
     `\`parse1('${input}')\``

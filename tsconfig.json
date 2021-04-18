@@ -1,0 +1,16 @@
+{
+  "extends": "@tsconfig/node10/tsconfig.json",
+  "include": [
+    "src/**/*.ts"
+  ],
+  "typedocOptions": {
+    "disableSources": true,
+    "entryDocument": "index.md",
+    "entryPoints": ["src/parseley.ts"],
+    "hideBreadcrumbs": true,
+    "includeVersion": true,
+    "name": "API documentation",
+    "readme": "none",
+    "out": "docs"
+  }
+}

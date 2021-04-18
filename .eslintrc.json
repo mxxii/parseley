@@ -4,24 +4,19 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:jsdoc/recommended",
-    "plugin:jsonc/auto-config",
-    "plugin:jsonc/recommended-with-jsonc"
+    "eslint:recommended"
   ],
   "ignorePatterns": [
     ".vscode",
+    "lib",
     "node_modules",
-    "package-lock.json",
-    "**/grammar.js"
+    "**/grammar.js",
+    "**/grammar.ts"
   ],
   "parserOptions": {
+    "sourceType": "module",
     "ecmaVersion": 2018
   },
-  "plugins": [
-    "jsdoc",
-    "jsonc"
-  ],
   "rules": {
     "eol-last": "error",
     "indent": ["error", 2, { "SwitchCase": 1 }],
@@ -30,22 +25,41 @@
     "prefer-const": "error",
     "quote-props": ["error", "consistent"],
     "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
-    "semi": ["error", "always"],
-
-    "jsdoc/check-indentation": "error",
-    "jsdoc/check-syntax": "error",
-    "jsdoc/require-description-complete-sentence": "error",
-    "jsdoc/require-hyphen-before-param-description": ["error", "never"],
-    "jsdoc/require-jsdoc": ["error", { "publicOnly": true }],
-    "jsdoc/require-returns-description": "off",
-
-    "jsonc/array-bracket-newline": ["error", "consistent"],
-    "jsonc/array-element-newline": ["error", "consistent"]
+    "semi": ["error", "always"]
   },
   "overrides": [
     {
-      "files": ["*.json"],
-      "parser": "jsonc-eslint-parser"
+      "files": ["**/*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": ["./tsconfig.eslint.json"],
+        "sourceType": "module",
+        "ecmaVersion": 2018
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "plugins": [
+        "@typescript-eslint",
+        "eslint-plugin-tsdoc"
+      ],
+      "rules": {
+        "tsdoc/syntax": "error"
+      }
+    },
+    {
+      "files": ["*.json", "*.json5", "*.jsonc"],
+      "parser": "jsonc-eslint-parser",
+      "plugins": [
+        "jsonc"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:jsonc/auto-config",
+        "plugin:jsonc/recommended-with-jsonc"
+      ]
     }
   ]
 }

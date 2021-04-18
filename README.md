@@ -86,68 +86,11 @@ Serialized: 'div#id1>.class1[attr1]'
 </details>
 
 
-## API
+## Documentation
 
-### `parse(str)`
-
-Parse a CSS selector string.
-
-This function supports comma-separated selector lists
-and always returns an AST starting from a node of type `list`.
-
-| Param | Type     | Description
-| ----- | -------- | -----------
-| str   | `string` | CSS selector string (can contain commas).
-
-### `parse1(str)`
-
-Parse a CSS selector string.
-
-This function does not support comma-separated selector lists
-and always returns an AST starting from a node of type `compound`.
-
-| Param | Type     | Description
-| ----- | -------- | -----------
-| str   | `string` | CSS selector string (no commas).
-
-### `serialize(ast)`
-
-Convert a selector AST back to a string representation.
-
-Note: formatting is not preserved in the AST.
-
-| Param | Type     | Description
-| ----- | -------- | -----------
-| ast   | `object` | An AST object.
-
-### `sort(ast)`
-
-Modifies the given AST **in place** to have all internal arrays
-in a stable order. Returns the AST.
-
-Intended for consitent processing and normalized `serialize()` output.
-
-| Param | Type     | Description
-| ----- | -------- | -----------
-| ast   | `object` | An AST object.
-
-### `compareArrays(a, b)`
-
-Comparator function with the following criterion:
-
-Array elements with the same index are compared
-one by one from the beginning.
-First non-equal result is returned.
-After the length of the shorter array is reached
-without finding a difference - array lengths are compared.
-
-Can be used to compare specificity values without reducing them
-as arbitrary base numbers.
-
-| Param | Type     | Description
-| ----- | -------- | -----------
-| a     | `Array`  | First array.
-| b     | `Array`  | Second array.
+* [Functions](https://github.com/mxxii/parseley/blob/main/docs/index.md)
+* [AST types](https://github.com/mxxii/parseley/blob/main/docs/modules/ast.md)
+* [Snapshots](https://github.com/mxxii/parseley/blob/main/test/snapshots/snapshots.ts.md)
 
 
 ## Motivation and inspiration
@@ -183,8 +126,6 @@ Complex selectors are represented in the way that makes the left side to be an a
 
 All AST nodes have their specificity computed (except the top-level list of comma-separated selectors where it doesn't really make sense).
 
-Exact AST contents are captured in [snapshots](https://github.com/mxxii/parseley/blob/main/test/snapshots/snapshots.js.md).
-
 
 ## Changelog
 
@@ -193,10 +134,6 @@ Available here: [CHANGELOG.md](https://github.com/mxxii/parseley/blob/main/CHANG
 
 ## Roadmap
 
-* pseudo-classes and pseudo-elements;
-* types;
-* ES module and CommonJS dual package.
-
-Switching to TypeScript might allow to hit two birds with one stone, but requires some experimentation with Nearley.
+* add pseudo-classes and pseudo-elements support.
 
 Share your use cases in [issues](https://github.com/mxxii/parseley/issues) so I can get a better idea where to move.

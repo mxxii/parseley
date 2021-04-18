@@ -1,6 +1,6 @@
 const util = require('util');
 
-const parseley = require('../lib/parseley');
+const parseley = require('../lib/parseley.cjs');
 
 const str = 'div#id1 > .class1[attr1]';
 
