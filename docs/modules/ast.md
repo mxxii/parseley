@@ -30,7 +30,7 @@ Attribute presence selector.
 `parseley` considers attribute presence and value selectors to be unrelated entities
 for simplicity of processing.
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |
@@ -52,7 +52,7 @@ Attribute value selector.
 `parseley` considers attribute presence and value selectors to be unrelated entities
 for simplicity of processing.
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |
@@ -74,7 +74,7 @@ Class selector.
 
 [https://www.w3.org/TR/selectors/#class-html](https://www.w3.org/TR/selectors/#class-html)
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |
@@ -92,7 +92,7 @@ Represents a selectors combinator with what's on the left side of it.
 
 [https://www.w3.org/TR/selectors/#combinators](https://www.w3.org/TR/selectors/#combinators)
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |
@@ -121,7 +121,7 @@ Specificity value also includes any extra weight added by the left side.
 If there is a combinator in the selector - it is guaranteed to be
 the last entry in the list of inner selectors.
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |
@@ -139,7 +139,7 @@ Id selector.
 
 [https://www.w3.org/TR/selectors/#id-selectors](https://www.w3.org/TR/selectors/#id-selectors)
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |
@@ -160,7 +160,7 @@ Represents a comma-separated list of compound selectors.
 As this kind of selector can combine different ways to match elements,
 a single specificity value doesn't make sense for it and therefore absent.
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |
@@ -219,7 +219,7 @@ Tag name (type) selector.
 `parseley` considers tag name and universal selectors to be unrelated entities
 for simplicity of processing.
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |
@@ -241,7 +241,7 @@ The `*` selector.
 `parseley` considers tag name and universal selectors to be unrelated entities
 for simplicity of processing.
 
-#### Type declaration:
+#### Type declaration
 
 | Name | Type |
 | :------ | :------ |

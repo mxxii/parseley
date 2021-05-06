@@ -25,7 +25,7 @@ Compare selectors based on their specificity.
 
 Usable as a comparator for sorting.
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
@@ -45,7 +45,7 @@ as arbitrary base numbers.
 
 Usable as a comparator for sorting.
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
@@ -65,7 +65,7 @@ in a stable order. Returns the AST.
 
 Intended for consitent processing and normalized `serialize()` output.
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
@@ -84,7 +84,7 @@ Parse a CSS selector string.
 This function supports comma-separated selector lists
 and always returns an AST starting from a node of type `list`.
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
@@ -103,7 +103,7 @@ Parse a CSS selector string.
 This function does not support comma-separated selector lists
 and always returns an AST starting from a node of type `compound`.
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
@@ -121,7 +121,7 @@ Convert a selector AST back to a string representation.
 
 Note: formatting is not preserved in the AST.
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
