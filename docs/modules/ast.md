@@ -21,7 +21,7 @@
 
 ### AttrabutePresenceSelector
 
-Ƭ **AttrabutePresenceSelector**: *object*
+Ƭ **AttrabutePresenceSelector**: `Object`
 
 Attribute presence selector.
 
@@ -34,16 +34,16 @@ for simplicity of processing.
 
 | Name | Type |
 | :------ | :------ |
-| `name` | *string* |
-| `namespace` | *string* \| ``null`` |
-| `specificity` | [*Specificity*](ast.md#specificity) |
+| `name` | `string` |
+| `namespace` | `string` \| ``null`` |
+| `specificity` | [Specificity](ast.md#specificity) |
 | `type` | ``"attrPresence"`` |
 
 ___
 
 ### AttrabuteValueSelector
 
-Ƭ **AttrabuteValueSelector**: *object*
+Ƭ **AttrabuteValueSelector**: `Object`
 
 Attribute value selector.
 
@@ -58,17 +58,17 @@ for simplicity of processing.
 | :------ | :------ |
 | `matcher` | ``"="`` \| ``"~="`` \| ``"\|="`` \| ``"^="`` \| ``"$="`` \| ``"*="`` |
 | `modifier` | ``"i"`` \| ``"s"`` \| ``null`` |
-| `name` | *string* |
-| `namespace` | *string* \| ``null`` |
-| `specificity` | [*Specificity*](ast.md#specificity) |
+| `name` | `string` |
+| `namespace` | `string` \| ``null`` |
+| `specificity` | [Specificity](ast.md#specificity) |
 | `type` | ``"attrValue"`` |
-| `value` | *string* |
+| `value` | `string` |
 
 ___
 
 ### ClassSelector
 
-Ƭ **ClassSelector**: *object*
+Ƭ **ClassSelector**: `Object`
 
 Class selector.
 
@@ -78,15 +78,15 @@ Class selector.
 
 | Name | Type |
 | :------ | :------ |
-| `name` | *string* |
-| `specificity` | [*Specificity*](ast.md#specificity) |
+| `name` | `string` |
+| `specificity` | [Specificity](ast.md#specificity) |
 | `type` | ``"class"`` |
 
 ___
 
 ### Combinator
 
-Ƭ **Combinator**: *object*
+Ƭ **Combinator**: `Object`
 
 Represents a selectors combinator with what's on the left side of it.
 
@@ -97,15 +97,15 @@ Represents a selectors combinator with what's on the left side of it.
 | Name | Type |
 | :------ | :------ |
 | `combinator` | ``" "`` \| ``"+"`` \| ``">"`` \| ``"~"`` \| ``"\|\|"`` |
-| `left` | [*CompoundSelector*](ast.md#compoundselector) |
-| `specificity` | [*Specificity*](ast.md#specificity) |
+| `left` | [CompoundSelector](ast.md#compoundselector) |
+| `specificity` | [Specificity](ast.md#specificity) |
 | `type` | ``"combinator"`` |
 
 ___
 
 ### CompoundSelector
 
-Ƭ **CompoundSelector**: *object*
+Ƭ **CompoundSelector**: `Object`
 
 Compound selector - a set of conditions describing a single element.
 
@@ -125,15 +125,15 @@ the last entry in the list of inner selectors.
 
 | Name | Type |
 | :------ | :------ |
-| `list` | [*SimpleSelector*](ast.md#simpleselector)[] |
-| `specificity` | [*Specificity*](ast.md#specificity) |
+| `list` | [SimpleSelector](ast.md#simpleselector)[] |
+| `specificity` | [Specificity](ast.md#specificity) |
 | `type` | ``"compound"`` |
 
 ___
 
 ### IdSelector
 
-Ƭ **IdSelector**: *object*
+Ƭ **IdSelector**: `Object`
 
 Id selector.
 
@@ -143,15 +143,15 @@ Id selector.
 
 | Name | Type |
 | :------ | :------ |
-| `name` | *string* |
-| `specificity` | [*Specificity*](ast.md#specificity) |
+| `name` | `string` |
+| `specificity` | [Specificity](ast.md#specificity) |
 | `type` | ``"id"`` |
 
 ___
 
 ### ListSelector
 
-Ƭ **ListSelector**: *object*
+Ƭ **ListSelector**: `Object`
 
 Represents a comma-separated list of compound selectors.
 
@@ -164,14 +164,14 @@ a single specificity value doesn't make sense for it and therefore absent.
 
 | Name | Type |
 | :------ | :------ |
-| `list` | [*CompoundSelector*](ast.md#compoundselector)[] |
+| `list` | [CompoundSelector](ast.md#compoundselector)[] |
 | `type` | ``"list"`` |
 
 ___
 
 ### Selector
 
-Ƭ **Selector**: [*ListSelector*](ast.md#listselector) \| [*CompoundSelector*](ast.md#compoundselector) \| [*SimpleSelector*](ast.md#simpleselector)
+Ƭ **Selector**: [ListSelector](ast.md#listselector) \| [CompoundSelector](ast.md#compoundselector) \| [SimpleSelector](ast.md#simpleselector)
 
 Any kind of selector supported by `parseley`.
 
@@ -179,7 +179,7 @@ ___
 
 ### SimpleSelector
 
-Ƭ **SimpleSelector**: [*UniversalSelector*](ast.md#universalselector) \| [*TagSelector*](ast.md#tagselector) \| [*ClassSelector*](ast.md#classselector) \| [*IdSelector*](ast.md#idselector) \| [*AttrabutePresenceSelector*](ast.md#attrabutepresenceselector) \| [*AttrabuteValueSelector*](ast.md#attrabutevalueselector) \| [*Combinator*](ast.md#combinator)
+Ƭ **SimpleSelector**: [UniversalSelector](ast.md#universalselector) \| [TagSelector](ast.md#tagselector) \| [ClassSelector](ast.md#classselector) \| [IdSelector](ast.md#idselector) \| [AttrabutePresenceSelector](ast.md#attrabutepresenceselector) \| [AttrabuteValueSelector](ast.md#attrabutevalueselector) \| [Combinator](ast.md#combinator)
 
 Any thing representing a single condition on an element.
 
@@ -195,7 +195,7 @@ ___
 
 ### Specificity
 
-Ƭ **Specificity**: [*number*, *number*, *number*]
+Ƭ **Specificity**: [`number`, `number`, `number`]
 
 Specificity as defined by Selectors spec.
 
@@ -210,7 +210,7 @@ ___
 
 ### TagSelector
 
-Ƭ **TagSelector**: *object*
+Ƭ **TagSelector**: `Object`
 
 Tag name (type) selector.
 
@@ -223,16 +223,16 @@ for simplicity of processing.
 
 | Name | Type |
 | :------ | :------ |
-| `name` | *string* |
-| `namespace` | *string* \| ``null`` |
-| `specificity` | [*Specificity*](ast.md#specificity) |
+| `name` | `string` |
+| `namespace` | `string` \| ``null`` |
+| `specificity` | [Specificity](ast.md#specificity) |
 | `type` | ``"tag"`` |
 
 ___
 
 ### UniversalSelector
 
-Ƭ **UniversalSelector**: *object*
+Ƭ **UniversalSelector**: `Object`
 
 The `*` selector.
 
@@ -245,6 +245,6 @@ for simplicity of processing.
 
 | Name | Type |
 | :------ | :------ |
-| `namespace` | *string* \| ``null`` |
-| `specificity` | [*Specificity*](ast.md#specificity) |
+| `namespace` | `string` \| ``null`` |
+| `specificity` | [Specificity](ast.md#specificity) |
 | `type` | ``"universal"`` |

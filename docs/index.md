@@ -19,7 +19,7 @@
 
 ### compareSelectors
 
-▸ **compareSelectors**(`a`: [*SimpleSelector*](modules/ast.md#simpleselector) \| [*CompoundSelector*](modules/ast.md#compoundselector), `b`: [*SimpleSelector*](modules/ast.md#simpleselector) \| [*CompoundSelector*](modules/ast.md#compoundselector)): *number*
+▸ **compareSelectors**(`a`, `b`): `number`
 
 Compare selectors based on their specificity.
 
@@ -29,16 +29,18 @@ Usable as a comparator for sorting.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `a` | [*SimpleSelector*](modules/ast.md#simpleselector) \| [*CompoundSelector*](modules/ast.md#compoundselector) | First selector. |
-| `b` | [*SimpleSelector*](modules/ast.md#simpleselector) \| [*CompoundSelector*](modules/ast.md#compoundselector) | Second selector. |
+| `a` | [SimpleSelector](modules/ast.md#simpleselector) \| [CompoundSelector](modules/ast.md#compoundselector) | First selector. |
+| `b` | [SimpleSelector](modules/ast.md#simpleselector) \| [CompoundSelector](modules/ast.md#compoundselector) | Second selector. |
 
-**Returns:** *number*
+#### Returns
+
+`number`
 
 ___
 
 ### compareSpecificity
 
-▸ **compareSpecificity**(`a`: [*Specificity*](modules/ast.md#specificity), `b`: [*Specificity*](modules/ast.md#specificity)): *number*
+▸ **compareSpecificity**(`a`, `b`): `number`
 
 Compare specificity values without reducing them
 as arbitrary base numbers.
@@ -49,16 +51,18 @@ Usable as a comparator for sorting.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `a` | [*Specificity*](modules/ast.md#specificity) | First specificity value. |
-| `b` | [*Specificity*](modules/ast.md#specificity) | Second specificity value. |
+| `a` | [Specificity](modules/ast.md#specificity) | First specificity value. |
+| `b` | [Specificity](modules/ast.md#specificity) | Second specificity value. |
 
-**Returns:** *number*
+#### Returns
+
+`number`
 
 ___
 
 ### normalize
 
-▸ **normalize**(`selector`: [*Selector*](modules/ast.md#selector)): [*Selector*](modules/ast.md#selector)
+▸ **normalize**(`selector`): [Selector](modules/ast.md#selector)
 
 Modifies the given AST **in place** to have all internal arrays
 in a stable order. Returns the AST.
@@ -69,15 +73,17 @@ Intended for consitent processing and normalized `serialize()` output.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `selector` | [*Selector*](modules/ast.md#selector) | A selector AST object. |
+| `selector` | [Selector](modules/ast.md#selector) | A selector AST object. |
 
-**Returns:** [*Selector*](modules/ast.md#selector)
+#### Returns
+
+[Selector](modules/ast.md#selector)
 
 ___
 
 ### parse
 
-▸ **parse**(`str`: *string*): [*ListSelector*](modules/ast.md#listselector)
+▸ **parse**(`str`): [ListSelector](modules/ast.md#listselector)
 
 Parse a CSS selector string.
 
@@ -88,15 +94,17 @@ and always returns an AST starting from a node of type `list`.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `str` | *string* | CSS selector string (can contain commas). |
+| `str` | `string` | CSS selector string (can contain commas). |
 
-**Returns:** [*ListSelector*](modules/ast.md#listselector)
+#### Returns
+
+[ListSelector](modules/ast.md#listselector)
 
 ___
 
 ### parse1
 
-▸ **parse1**(`str`: *string*): [*CompoundSelector*](modules/ast.md#compoundselector)
+▸ **parse1**(`str`): [CompoundSelector](modules/ast.md#compoundselector)
 
 Parse a CSS selector string.
 
@@ -107,15 +115,17 @@ and always returns an AST starting from a node of type `compound`.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `str` | *string* | CSS selector string (no commas). |
+| `str` | `string` | CSS selector string (no commas). |
 
-**Returns:** [*CompoundSelector*](modules/ast.md#compoundselector)
+#### Returns
+
+[CompoundSelector](modules/ast.md#compoundselector)
 
 ___
 
 ### serialize
 
-▸ **serialize**(`selector`: [*Selector*](modules/ast.md#selector)): *string*
+▸ **serialize**(`selector`): `string`
 
 Convert a selector AST back to a string representation.
 
@@ -125,6 +135,8 @@ Note: formatting is not preserved in the AST.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `selector` | [*Selector*](modules/ast.md#selector) | A selector AST object. |
+| `selector` | [Selector](modules/ast.md#selector) | A selector AST object. |
 
-**Returns:** *string*
+#### Returns
+
+`string`
