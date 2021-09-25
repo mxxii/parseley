@@ -4,6 +4,7 @@
 ![test status badge](https://github.com/mxxii/parseley/workflows/test/badge.svg)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/mxxii/parseley/blob/main/LICENSE)
 [![npm](https://img.shields.io/npm/v/parseley?logo=npm)](https://www.npmjs.com/package/parseley)
+[![npm](https://img.shields.io/npm/dw/parseley?color=informational&logo=npm)](https://www.npmjs.com/package/parseley)
 
 **Par**ser for CSS **sel**ectors, based on [nearl**ey**](https://nearley.js.org/).
 
@@ -134,6 +135,6 @@ Available here: [CHANGELOG.md](https://github.com/mxxii/parseley/blob/main/CHANG
 
 ## Roadmap
 
-* add pseudo-classes and pseudo-elements support.
+* add pseudo-classes and pseudo-elements support ([#12](https://github.com/mxxii/parseley/issues/12))
 
 Share your use cases in [issues](https://github.com/mxxii/parseley/issues) so I can get a better idea where to move.
