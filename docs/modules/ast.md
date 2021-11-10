@@ -4,18 +4,18 @@
 
 ### Type aliases
 
-- [AttributePresenceSelector](ast.md#attributepresenceselector)
-- [AttributeValueSelector](ast.md#attributevalueselector)
-- [ClassSelector](ast.md#classselector)
-- [Combinator](ast.md#combinator)
-- [CompoundSelector](ast.md#compoundselector)
-- [IdSelector](ast.md#idselector)
-- [ListSelector](ast.md#listselector)
-- [Selector](ast.md#selector)
-- [SimpleSelector](ast.md#simpleselector)
-- [Specificity](ast.md#specificity)
-- [TagSelector](ast.md#tagselector)
-- [UniversalSelector](ast.md#universalselector)
+- [AttributePresenceSelector](Ast.md#attributepresenceselector)
+- [AttributeValueSelector](Ast.md#attributevalueselector)
+- [ClassSelector](Ast.md#classselector)
+- [Combinator](Ast.md#combinator)
+- [CompoundSelector](Ast.md#compoundselector)
+- [IdSelector](Ast.md#idselector)
+- [ListSelector](Ast.md#listselector)
+- [Selector](Ast.md#selector)
+- [SimpleSelector](Ast.md#simpleselector)
+- [Specificity](Ast.md#specificity)
+- [TagSelector](Ast.md#tagselector)
+- [UniversalSelector](Ast.md#universalselector)
 
 ## Type aliases
 
@@ -36,7 +36,7 @@ for simplicity of processing.
 | :------ | :------ |
 | `name` | `string` |
 | `namespace` | `string` \| ``null`` |
-| `specificity` | [Specificity](ast.md#specificity) |
+| `specificity` | [`Specificity`](Ast.md#specificity) |
 | `type` | ``"attrPresence"`` |
 
 ___
@@ -60,7 +60,7 @@ for simplicity of processing.
 | `modifier` | ``"i"`` \| ``"s"`` \| ``null`` |
 | `name` | `string` |
 | `namespace` | `string` \| ``null`` |
-| `specificity` | [Specificity](ast.md#specificity) |
+| `specificity` | [`Specificity`](Ast.md#specificity) |
 | `type` | ``"attrValue"`` |
 | `value` | `string` |
 
@@ -79,7 +79,7 @@ Class selector.
 | Name | Type |
 | :------ | :------ |
 | `name` | `string` |
-| `specificity` | [Specificity](ast.md#specificity) |
+| `specificity` | [`Specificity`](Ast.md#specificity) |
 | `type` | ``"class"`` |
 
 ___
@@ -97,8 +97,8 @@ Represents a selectors combinator with what's on the left side of it.
 | Name | Type |
 | :------ | :------ |
 | `combinator` | ``" "`` \| ``"+"`` \| ``">"`` \| ``"~"`` \| ``"\|\|"`` |
-| `left` | [CompoundSelector](ast.md#compoundselector) |
-| `specificity` | [Specificity](ast.md#specificity) |
+| `left` | [`CompoundSelector`](Ast.md#compoundselector) |
+| `specificity` | [`Specificity`](Ast.md#specificity) |
 | `type` | ``"combinator"`` |
 
 ___
@@ -125,8 +125,8 @@ the last entry in the list of inner selectors.
 
 | Name | Type |
 | :------ | :------ |
-| `list` | [SimpleSelector](ast.md#simpleselector)[] |
-| `specificity` | [Specificity](ast.md#specificity) |
+| `list` | [`SimpleSelector`](Ast.md#simpleselector)[] |
+| `specificity` | [`Specificity`](Ast.md#specificity) |
 | `type` | ``"compound"`` |
 
 ___
@@ -144,7 +144,7 @@ Id selector.
 | Name | Type |
 | :------ | :------ |
 | `name` | `string` |
-| `specificity` | [Specificity](ast.md#specificity) |
+| `specificity` | [`Specificity`](Ast.md#specificity) |
 | `type` | ``"id"`` |
 
 ___
@@ -164,14 +164,14 @@ a single specificity value doesn't make sense for it and therefore absent.
 
 | Name | Type |
 | :------ | :------ |
-| `list` | [CompoundSelector](ast.md#compoundselector)[] |
+| `list` | [`CompoundSelector`](Ast.md#compoundselector)[] |
 | `type` | ``"list"`` |
 
 ___
 
 ### Selector
 
-Ƭ **Selector**: [ListSelector](ast.md#listselector) \| [CompoundSelector](ast.md#compoundselector) \| [SimpleSelector](ast.md#simpleselector)
+Ƭ **Selector**: [`ListSelector`](Ast.md#listselector) \| [`CompoundSelector`](Ast.md#compoundselector) \| [`SimpleSelector`](Ast.md#simpleselector)
 
 Any kind of selector supported by `parseley`.
 
@@ -179,7 +179,7 @@ ___
 
 ### SimpleSelector
 
-Ƭ **SimpleSelector**: [UniversalSelector](ast.md#universalselector) \| [TagSelector](ast.md#tagselector) \| [ClassSelector](ast.md#classselector) \| [IdSelector](ast.md#idselector) \| [AttributePresenceSelector](ast.md#attributepresenceselector) \| [AttributeValueSelector](ast.md#attributevalueselector) \| [Combinator](ast.md#combinator)
+Ƭ **SimpleSelector**: [`UniversalSelector`](Ast.md#universalselector) \| [`TagSelector`](Ast.md#tagselector) \| [`ClassSelector`](Ast.md#classselector) \| [`IdSelector`](Ast.md#idselector) \| [`AttributePresenceSelector`](Ast.md#attributepresenceselector) \| [`AttributeValueSelector`](Ast.md#attributevalueselector) \| [`Combinator`](Ast.md#combinator)
 
 Any thing representing a single condition on an element.
 
@@ -225,7 +225,7 @@ for simplicity of processing.
 | :------ | :------ |
 | `name` | `string` |
 | `namespace` | `string` \| ``null`` |
-| `specificity` | [Specificity](ast.md#specificity) |
+| `specificity` | [`Specificity`](Ast.md#specificity) |
 | `type` | ``"tag"`` |
 
 ___
@@ -246,5 +246,5 @@ for simplicity of processing.
 | Name | Type |
 | :------ | :------ |
 | `namespace` | `string` \| ``null`` |
-| `specificity` | [Specificity](ast.md#specificity) |
+| `specificity` | [`Specificity`](Ast.md#specificity) |
 | `type` | ``"universal"`` |

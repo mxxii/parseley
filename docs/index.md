@@ -4,7 +4,7 @@
 
 ### Namespaces
 
-- [Ast](modules/ast.md)
+- [Ast](modules/Ast.md)
 
 ### Functions
 
@@ -29,8 +29,8 @@ Usable as a comparator for sorting.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `a` | [SimpleSelector](modules/ast.md#simpleselector) \| [CompoundSelector](modules/ast.md#compoundselector) | First selector. |
-| `b` | [SimpleSelector](modules/ast.md#simpleselector) \| [CompoundSelector](modules/ast.md#compoundselector) | Second selector. |
+| `a` | [`SimpleSelector`](modules/Ast.md#simpleselector) \| [`CompoundSelector`](modules/Ast.md#compoundselector) | First selector. |
+| `b` | [`SimpleSelector`](modules/Ast.md#simpleselector) \| [`CompoundSelector`](modules/Ast.md#compoundselector) | Second selector. |
 
 #### Returns
 
@@ -51,8 +51,8 @@ Usable as a comparator for sorting.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `a` | [Specificity](modules/ast.md#specificity) | First specificity value. |
-| `b` | [Specificity](modules/ast.md#specificity) | Second specificity value. |
+| `a` | [`Specificity`](modules/Ast.md#specificity) | First specificity value. |
+| `b` | [`Specificity`](modules/Ast.md#specificity) | Second specificity value. |
 
 #### Returns
 
@@ -62,7 +62,7 @@ ___
 
 ### normalize
 
-▸ **normalize**(`selector`): [Selector](modules/ast.md#selector)
+▸ **normalize**(`selector`): [`Selector`](modules/Ast.md#selector)
 
 Modifies the given AST **in place** to have all internal arrays
 in a stable order. Returns the AST.
@@ -73,17 +73,17 @@ Intended for consistent processing and normalized `serialize()` output.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `selector` | [Selector](modules/ast.md#selector) | A selector AST object. |
+| `selector` | [`Selector`](modules/Ast.md#selector) | A selector AST object. |
 
 #### Returns
 
-[Selector](modules/ast.md#selector)
+[`Selector`](modules/Ast.md#selector)
 
 ___
 
 ### parse
 
-▸ **parse**(`str`): [ListSelector](modules/ast.md#listselector)
+▸ **parse**(`str`): [`ListSelector`](modules/Ast.md#listselector)
 
 Parse a CSS selector string.
 
@@ -98,13 +98,13 @@ and always returns an AST starting from a node of type `list`.
 
 #### Returns
 
-[ListSelector](modules/ast.md#listselector)
+[`ListSelector`](modules/Ast.md#listselector)
 
 ___
 
 ### parse1
 
-▸ **parse1**(`str`): [CompoundSelector](modules/ast.md#compoundselector)
+▸ **parse1**(`str`): [`CompoundSelector`](modules/Ast.md#compoundselector)
 
 Parse a CSS selector string.
 
@@ -119,7 +119,7 @@ and always returns an AST starting from a node of type `compound`.
 
 #### Returns
 
-[CompoundSelector](modules/ast.md#compoundselector)
+[`CompoundSelector`](modules/Ast.md#compoundselector)
 
 ___
 
@@ -135,7 +135,7 @@ Note: formatting is not preserved in the AST.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `selector` | [Selector](modules/ast.md#selector) | A selector AST object. |
+| `selector` | [`Selector`](modules/Ast.md#selector) | A selector AST object. |
 
 #### Returns
 

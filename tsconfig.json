@@ -1,12 +1,16 @@
 {
-  "extends": "@tsconfig/node10/tsconfig.json",
+  "extends": "@tsconfig/node12/tsconfig.json",
   "include": [
     "src/**/*.ts"
   ],
+  "compilerOptions": {
+    "outDir": "./lib"
+  },
   "typedocOptions": {
     "disableSources": true,
     "entryDocument": "index.md",
     "entryPoints": ["src/parseley.ts"],
+    "githubPages": false,
     "hideBreadcrumbs": true,
     "includeVersion": true,
     "name": "API documentation",
