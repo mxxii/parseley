@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.8.0
+
+* Drop Node.js version 10 support. 12.22.x is required;
+* Fix typos in type definitions.
+
 ## Version 0.7.0
 
 * Switched to TypeScript;
