@@ -98,7 +98,7 @@ function _serStr (str: string): string {
  * Modifies the given AST **in place** to have all internal arrays
  * in a stable order. Returns the AST.
  *
- * Intended for consitent processing and normalized `serialize()` output.
+ * Intended for consistent processing and normalized `serialize()` output.
  *
  * @param selector - A selector AST object.
  */

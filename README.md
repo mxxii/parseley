@@ -123,7 +123,7 @@ For example, always use compound selectors, even when there is only one simple s
 
 Comma-separated selectors might not be needed for every use case. So there are two functions - one can parse commas and always returns the top-level list regardless of the comma presence in a particular selector, and the other can't parse commas and returns a compound selector AST directly.
 
-Complex selectors are represented in the way that makes the left side to be an another condition on the right side element. This was made with the right-to-left processing direction in mind. One consequence of this is that there is no such thing as a "complex selector" node in the AST hierachy, but there are "combinator" nodes attached to "compound selector" nodes.
+Complex selectors are represented in the way that makes the left side to be an another condition on the right side element. This was made with the right-to-left processing direction in mind. One consequence of this is that there is no such thing as a "complex selector" node in the AST hierarchy, but there are "combinator" nodes attached to "compound selector" nodes.
 
 All AST nodes have their specificity computed (except the top-level list of comma-separated selectors where it doesn't really make sense).
 

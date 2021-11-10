@@ -4,8 +4,8 @@
 
 ### Type aliases
 
-- [AttrabutePresenceSelector](ast.md#attrabutepresenceselector)
-- [AttrabuteValueSelector](ast.md#attrabutevalueselector)
+- [AttributePresenceSelector](ast.md#attributepresenceselector)
+- [AttributeValueSelector](ast.md#attributevalueselector)
 - [ClassSelector](ast.md#classselector)
 - [Combinator](ast.md#combinator)
 - [CompoundSelector](ast.md#compoundselector)
@@ -19,9 +19,9 @@
 
 ## Type aliases
 
-### AttrabutePresenceSelector
+### AttributePresenceSelector
 
-Ƭ **AttrabutePresenceSelector**: `Object`
+Ƭ **AttributePresenceSelector**: `Object`
 
 Attribute presence selector.
 
@@ -41,9 +41,9 @@ for simplicity of processing.
 
 ___
 
-### AttrabuteValueSelector
+### AttributeValueSelector
 
-Ƭ **AttrabuteValueSelector**: `Object`
+Ƭ **AttributeValueSelector**: `Object`
 
 Attribute value selector.
 
@@ -179,7 +179,7 @@ ___
 
 ### SimpleSelector
 
-Ƭ **SimpleSelector**: [UniversalSelector](ast.md#universalselector) \| [TagSelector](ast.md#tagselector) \| [ClassSelector](ast.md#classselector) \| [IdSelector](ast.md#idselector) \| [AttrabutePresenceSelector](ast.md#attrabutepresenceselector) \| [AttrabuteValueSelector](ast.md#attrabutevalueselector) \| [Combinator](ast.md#combinator)
+Ƭ **SimpleSelector**: [UniversalSelector](ast.md#universalselector) \| [TagSelector](ast.md#tagselector) \| [ClassSelector](ast.md#classselector) \| [IdSelector](ast.md#idselector) \| [AttributePresenceSelector](ast.md#attributepresenceselector) \| [AttributeValueSelector](ast.md#attributevalueselector) \| [Combinator](ast.md#combinator)
 
 Any thing representing a single condition on an element.
 

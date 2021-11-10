@@ -70,7 +70,7 @@ export type IdSelector = {
  * `parseley` considers attribute presence and value selectors to be unrelated entities
  * for simplicity of processing.
  */
-export type AttrabutePresenceSelector = {
+export type AttributePresenceSelector = {
   type: 'attrPresence',
   name: string,
   namespace: string | null,
@@ -85,7 +85,7 @@ export type AttrabutePresenceSelector = {
  * `parseley` considers attribute presence and value selectors to be unrelated entities
  * for simplicity of processing.
  */
-export type AttrabuteValueSelector = {
+export type AttributeValueSelector = {
   type: 'attrValue',
   name: string,
   namespace: string | null,
@@ -123,8 +123,8 @@ export type SimpleSelector
   | TagSelector
   | ClassSelector
   | IdSelector
-  | AttrabutePresenceSelector
-  | AttrabuteValueSelector
+  | AttributePresenceSelector
+  | AttributeValueSelector
   | Combinator;
 
 /**
