@@ -90,7 +90,7 @@ Serialized: 'div#id1>.class1[attr1]'
 ## Documentation
 
 * [Functions](https://github.com/mxxii/parseley/blob/main/docs/index.md)
-* [AST types](https://github.com/mxxii/parseley/blob/main/docs/modules/ast.md)
+* [AST types](https://github.com/mxxii/parseley/blob/main/docs/modules/Ast.md)
 * [Snapshots](https://github.com/mxxii/parseley/blob/main/test/snapshots/snapshots.ts.md)
 
 
