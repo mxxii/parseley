@@ -16,5 +16,12 @@
     "name": "API documentation",
     "readme": "none",
     "out": "docs"
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "ESNext",
+      "esModuleInterop": true,
+      "moduleResolution": "Node"
+    }
   }
 }
