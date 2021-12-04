@@ -46,7 +46,9 @@
         "eslint-plugin-tsdoc"
       ],
       "rules": {
-        "tsdoc/syntax": "error"
+        "tsdoc/syntax": "error",
+        "indent": "off",
+        "@typescript-eslint/indent": ["error", 2, { "SwitchCase": 1 }]
       }
     },
     {
