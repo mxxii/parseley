@@ -17,7 +17,7 @@ test('should throw when parsing commas with parse1', t => {
   const error = t.throws(() => {
     parse1(input);
   });
-  t.true(error.message.includes('Unexpected comma token:'));
+  t.true(error.message.includes('only partially parsed, stopped at offset 1!'));
 });
 
 test('should produce equal AST for differently quoted attribute values', t => {
@@ -54,5 +54,5 @@ test('should throw when parsing pseudo-elements or pseudo-classes', t => {
   const error = t.throws(() => {
     parse(input3);
   });
-  t.true(error.message.includes('Unexpected input (lexer error).'));
+  t.true(error.message.includes('only partially tokenized, stopped at offset 1!'));
 });

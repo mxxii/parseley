@@ -1,43 +1,8 @@
-import { Parser, Grammar } from 'nearley';
-import compiledRules from './grammar';
+
 import * as Ast from './ast';
 
-// Passing the start argument to a parser or grammar constructor
-// doesn't seem to work as expected.
-const compiledRulesNoList = { ...compiledRules, ParserStart: 'mainNoList' };
-
-/**
- * Parse a CSS selector string.
- *
- * This function supports comma-separated selector lists
- * and always returns an AST starting from a node of type `list`.
- *
- * @param str - CSS selector string (can contain commas).
- */
-function parse (str: string): Ast.ListSelector {
-  return (_parse(compiledRules, str) as Ast.ListSelector);
-}
-
-/**
- * Parse a CSS selector string.
- *
- * This function does not support comma-separated selector lists
- * and always returns an AST starting from a node of type `compound`.
- *
- * @param str - CSS selector string (no commas).
- */
-function parse1 (str: string): Ast.CompoundSelector {
-  return (_parse(compiledRulesNoList, str) as Ast.CompoundSelector);
-}
-
-function _parse (compiledRules1: typeof compiledRules, str: string): unknown {
-  const parser =  new Parser(Grammar.fromCompiled(compiledRules1));
-  parser.feed(str);
-  if (parser.results.length === 0) {
-    throw new Error('Failed to parse - input string might be incomplete.');
-  }
-  return parser.results[0];
-}
+export { Ast };
+export { parse, parse1 } from './parser';
 
 /**
  * Convert a selector AST back to a string representation.
@@ -46,7 +11,7 @@ function _parse (compiledRules1: typeof compiledRules, str: string): unknown {
  *
  * @param selector - A selector AST object.
  */
-function serialize (selector: Ast.Selector): string {
+export function serialize (selector: Ast.Selector): string {
   if (!selector.type) {
     throw new Error('This is not an AST node.');
   }
@@ -102,7 +67,7 @@ function _serStr (str: string): string {
  *
  * @param selector - A selector AST object.
  */
-function normalize (selector: Ast.Selector): Ast.Selector {
+export function normalize (selector: Ast.Selector): Ast.Selector {
   if (!selector.type) {
     throw new Error('This is not an AST node.');
   }
@@ -159,7 +124,7 @@ function _getSelectorPriority (selector: Ast.SimpleSelector): [number, string?] 
  * @param a - First selector.
  * @param b - Second selector.
  */
-function compareSelectors (
+export function compareSelectors (
   a: Ast.SimpleSelector | Ast.CompoundSelector,
   b: Ast.SimpleSelector | Ast.CompoundSelector
 ): number {
@@ -175,7 +140,7 @@ function compareSelectors (
  * @param a - First specificity value.
  * @param b - Second specificity value.
  */
-function compareSpecificity (a: Ast.Specificity, b: Ast.Specificity): number {
+export function compareSpecificity (a: Ast.Specificity, b: Ast.Specificity): number {
   return _compareArrays(a, b);
 }
 
@@ -190,13 +155,3 @@ function _compareArrays (a: unknown[], b: unknown[]): number {
   }
   return a.length - b.length;
 }
-
-export {
-  Ast,
-  compareSelectors,
-  compareSpecificity,
-  normalize,
-  parse,
-  parse1,
-  serialize
-};

@@ -6,7 +6,7 @@
 [![npm](https://img.shields.io/npm/v/parseley?logo=npm)](https://www.npmjs.com/package/parseley)
 [![npm](https://img.shields.io/npm/dw/parseley?color=informational&logo=npm)](https://www.npmjs.com/package/parseley)
 
-**Par**ser for CSS **sel**ectors, based on [nearl**ey**](https://nearley.js.org/).
+**Par**ser for CSS **sele**ctors.
 
 ----
 
@@ -100,7 +100,7 @@ Serialized: 'div#id1>.class1[attr1]'
 | ---------- | --------- | ---------
 | [parsel](https://github.com/leaverou/parsel) | Sensible AST; specificity calculation; cool name | Not friendly to node.js; based on regex
 | [css-what](https://github.com/fb55/css-what) and [css-select](https://github.com/fb55/css-select) | The idea to process complex selectors in right-to-left order | `css-select` is a solution for a different problem compared to what I needed; `css-what` produces only a list of tokens
-| [scalpel](https://github.com/gajus/scalpel)  | Introduced me to [nearley](https://nearley.js.org/) parsing toolkit | AST it produces is very far from what I can use
+| [scalpel](https://github.com/gajus/scalpel)  | Introduced me to [nearley](https://nearley.js.org/) parsing toolkit (albeit I'm not using it here anymore) | AST it produces is very far from what I can use
 | [css-selector-parser](https://github.com/mdevils/css-selector-parser) | Configurable and lightweight | Again, AST is far from my needs
 
 

@@ -3,7 +3,6 @@
     "editor.detectIndentation": false,
     "files.exclude": {
       "node_modules/": true,
-      "**/grammar.ts": true,
       "package-lock.json":true
     },
     "eslint.validate": [
