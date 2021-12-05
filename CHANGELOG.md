@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.9.0
+
+* Replaced `moo` and `nearley` with my [leac](https://github.com/mxxii/leac) and [peberminta](https://github.com/mxxii/peberminta) packages. Now `parseley` with all dependencies are TypeScript, dual CommonJS/ES module packages;
+* Package is marked as free of side effects and tersed;
+* Deno version is provided, with the help of `denoify`.
+
 ## Version 0.8.0
 
 * Drop Node.js version 10 support. 12.22.x is required;

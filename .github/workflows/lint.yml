@@ -30,6 +30,4 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run nearley
-
       - run: npm run lint

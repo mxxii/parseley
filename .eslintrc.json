@@ -8,10 +8,9 @@
   ],
   "ignorePatterns": [
     ".vscode",
+    "deno",
     "lib",
-    "node_modules",
-    "**/grammar.js",
-    "**/grammar.ts"
+    "node_modules"
   ],
   "parserOptions": {
     "sourceType": "module",

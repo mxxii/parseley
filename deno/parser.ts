@@ -1,8 +1,8 @@
 
-import { createLexer, Token } from 'leac';
-import * as p from 'peberminta';
+import { createLexer, Token } from 'https://deno.land/x/leac@v0.5.0/leac.ts';
+import * as p from 'https://deno.land/x/peberminta@v0.5.2/core.ts';
 
-import * as ast from './ast';
+import * as ast from './ast.ts';
 
 
 // Lexer / tokenizer

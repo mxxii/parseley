@@ -1,7 +1,7 @@
 {
   "name": "parseley",
-  "version": "0.8.0",
-  "description": "CSS selectors parser, based on nearley",
+  "version": "0.9.0",
+  "description": "CSS selectors parser",
   "keywords": [
     "CSS",
     "selectors",
@@ -32,11 +32,13 @@
   "files": [
     "lib"
   ],
+  "sideEffects": false,
   "scripts": {
+    "build:deno": "denoify",
     "build:docs": "typedoc",
     "build:rollup": "rollup -c",
-    "build:types": "tsc --declaration --emitDeclarationOnly && rimraf ./lib/grammar.d.ts",
-    "build": "npm run clean && npm run build:rollup && npm run build:types && npm run build:docs",
+    "build:types": "tsc --declaration --emitDeclarationOnly",
+    "build": "npm run clean && npm run build:rollup && npm run build:types && npm run build:docs && npm run build:deno",
     "checkAll": "npm run lint && npm test",
     "clean": "rimraf lib",
     "example": "node ./example/example.cjs",
@@ -57,12 +59,14 @@
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "ava": "^3.15.0",
+    "denoify": "^0.10.5",
     "eslint": "^8.4.0",
     "eslint-plugin-jsonc": "^2.0.0",
     "eslint-plugin-tsdoc": "^0.2.14",
     "markdownlint-cli2": "^0.3.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.60.2",
+    "rollup-plugin-terser": "^7.0.2",
     "ts-node": "^10.4.0",
     "tslib": "^2.3.1",
     "typedoc": "^0.22.10",
@@ -84,5 +88,12 @@
       "configurableModuleFormat": true
     },
     "verbose": true
+  },
+  "denoify": {
+    "out": "./deno",
+    "ports": {
+      "leac": "https://deno.land/x/leac/leac.ts",
+      "peberminta": "https://deno.land/x/peberminta/core.ts"
+    }
   }
 }

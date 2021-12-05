@@ -1,4 +1,4 @@
-# API documentation - v0.8.0
+# API documentation - v0.9.0
 
 ## Table of contents
 
@@ -29,8 +29,8 @@ Usable as a comparator for sorting.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `a` | [`SimpleSelector`](modules/Ast.md#simpleselector) \| [`CompoundSelector`](modules/Ast.md#compoundselector) | First selector. |
-| `b` | [`SimpleSelector`](modules/Ast.md#simpleselector) \| [`CompoundSelector`](modules/Ast.md#compoundselector) | Second selector. |
+| `a` | [`CompoundSelector`](modules/Ast.md#compoundselector) \| [`SimpleSelector`](modules/Ast.md#simpleselector) | First selector. |
+| `b` | [`CompoundSelector`](modules/Ast.md#compoundselector) \| [`SimpleSelector`](modules/Ast.md#simpleselector) | Second selector. |
 
 #### Returns
 
