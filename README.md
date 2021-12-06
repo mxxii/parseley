@@ -12,26 +12,18 @@
 ----
 
 
-## Goals / features
+## Features
 
 * Convert CSS selector strings into objects that are easy to work with;
 
 * Serialize back if needed;
 
-* Get specificity for free;
-
-* Code is easy to understand and maintain.
+* Get specificity for free.
 
 
-## Non-goals
+## Changelog
 
-* Top performance;
-
-* Extra permissivity;
-
-* To-the-letter CSS spec implementation.
-
-These are great but only as long as it doesn't come in conflict with actual goals.
+Available here: [CHANGELOG.md](https://github.com/mxxii/parseley/blob/main/CHANGELOG.md).
 
 
 ## Install
@@ -112,16 +104,6 @@ Normalized: 'div#id1>.class1.class2[attr1]'
 * [Snapshots](https://github.com/mxxii/parseley/blob/main/test/snapshots/snapshots.ts.md)
 
 
-## Motivation and inspiration
-
-| Package    | Hits      | Misses
-| ---------- | --------- | ---------
-| [parsel](https://github.com/leaverou/parsel) | Sensible AST; specificity calculation; cool name | Not friendly to node.js; based on regex
-| [css-what](https://github.com/fb55/css-what) and [css-select](https://github.com/fb55/css-select) | The idea to process complex selectors in right-to-left order | `css-select` is a solution for a different problem compared to what I needed; `css-what` produces only a list of tokens
-| [scalpel](https://github.com/gajus/scalpel)  | Introduced me to [nearley](https://nearley.js.org/) parsing toolkit (albeit I'm not using it here anymore) | AST it produces is very far from what I can use
-| [css-selector-parser](https://github.com/mdevils/css-selector-parser) | Configurable and lightweight | Again, AST is far from my needs
-
-
 ## Input reference
 
 <https://www.w3.org/TR/selectors-4/#grammar>
@@ -146,13 +128,11 @@ Complex selectors are represented in the way that makes the left side to be an a
 All AST nodes have their specificity computed (except the top-level list of comma-separated selectors where it doesn't really make sense).
 
 
-## Changelog
+## Motivation and inspiration
 
-Available here: [CHANGELOG.md](https://github.com/mxxii/parseley/blob/main/CHANGELOG.md).
-
-
-## Roadmap
-
-* add pseudo-classes and pseudo-elements support ([#12](https://github.com/mxxii/parseley/issues/12))
-
-Share your use cases in [issues](https://github.com/mxxii/parseley/issues) so I can get a better idea where to move.
+| Package    | Hits      | Misses
+| ---------- | --------- | ---------
+| [parsel](https://github.com/leaverou/parsel) | Sensible AST; specificity calculation; cool name | Not friendly to node.js; based on regex
+| [css-what](https://github.com/fb55/css-what) and [css-select](https://github.com/fb55/css-select) | The idea to process complex selectors in right-to-left order | `css-select` is a solution for a different problem compared to what I needed; `css-what` produces only a list of tokens
+| [scalpel](https://github.com/gajus/scalpel)  | Introduced me to [nearley](https://nearley.js.org/) parsing toolkit (albeit I'm not using it here anymore) | AST it produces is very far from what I can use
+| [css-selector-parser](https://github.com/mdevils/css-selector-parser) | Configurable and lightweight | Again, AST is far from my needs

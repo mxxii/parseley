@@ -1,4 +1,5 @@
 import test from 'ava';
+import { AttributeValueSelector } from '../src/ast';
 
 import { parse, parse1 } from '../src/parseley';
 
@@ -18,6 +19,14 @@ test('should throw when parsing commas with parse1', t => {
     parse1(input);
   });
   t.true(error.message.includes('only partially parsed, stopped at offset 1!'));
+});
+
+test('should parse attribute value selectors with different matchers', t => {
+  const input = '[foo=bar][foo~=bar][foo|=bar][foo^=bar][foo$=bar][foo*=bar]';
+  const ast1 = parse1(input);
+  const list = ast1.list as AttributeValueSelector[];
+  t.is(list.length, 6);
+  t.is(list.map(s => s.matcher).join(' '), '= ~= |= ^= $= *=');
 });
 
 test('should produce equal AST for differently quoted attribute values', t => {

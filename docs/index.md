@@ -1,4 +1,4 @@
-# API documentation - v0.9.0
+# API documentation - v0.9.1
 
 ## Table of contents
 

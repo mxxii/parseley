@@ -1,6 +1,6 @@
 
 import { createLexer, Token } from 'https://deno.land/x/leac@v0.5.0/leac.ts';
-import * as p from 'https://deno.land/x/peberminta@v0.5.2/core.ts';
+import * as p from 'https://deno.land/x/peberminta@v0.5.4/core.ts';
 
 import * as ast from './ast.ts';
 
@@ -72,16 +72,28 @@ const namespace_: p.Parser<Token,unknown,string> = p.left(
   literal('|')
 );
 
-const qualifiedName_: p.Parser<Token,unknown,{ name: string, namespace: string | null }> = p.ab(
-  p.option(namespace_, null),
-  identifier_,
-  (ns, name) => ({ name: name, namespace: ns })
+const qualifiedName_: p.Parser<Token,unknown,{ name: string, namespace: string | null }> = p.choice(
+  p.ab(
+    namespace_,
+    identifier_,
+    (ns, name) => ({ name: name, namespace: ns as string | null })
+  ),
+  p.map(
+    identifier_,
+    (name) => ({ name: name, namespace: null })
+  )
 );
 
-const uniSelector_: p.Parser<Token,unknown,ast.UniversalSelector> = p.ab(
-  p.option(namespace_, null),
-  literal('*'),
-  (ns) => ({ type: 'universal', namespace: ns, specificity: [0, 0, 0] })
+const uniSelector_: p.Parser<Token,unknown,ast.UniversalSelector> = p.choice(
+  p.ab(
+    namespace_,
+    literal('*'),
+    (ns) => ({ type: 'universal', namespace: ns as string | null, specificity: [0, 0, 0] })
+  ),
+  p.map(
+    literal('*'),
+    () => ({ type: 'universal', namespace: null, specificity: [0, 0, 0] })
+  )
 );
 
 const tagSelector_: p.Parser<Token,unknown,ast.TagSelector> = p.map(
@@ -187,8 +199,8 @@ const attrSelector_ = p.choice(
 );
 
 const typeSelector_ = p.choice(
-  tagSelector_ as p.Parser<Token,unknown,ast.TagSelector|ast.UniversalSelector>,
-  uniSelector_
+  uniSelector_ as p.Parser<Token,unknown,ast.TagSelector|ast.UniversalSelector>,
+  tagSelector_
 );
 
 const subclassSelector_ = p.choice(

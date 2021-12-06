@@ -1,6 +1,6 @@
 {
   "name": "parseley",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "CSS selectors parser",
   "keywords": [
     "CSS",
@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "leac": "^0.5.0",
-    "peberminta": "^0.5.2"
+    "peberminta": "^0.5.4"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.0",
@@ -66,7 +66,7 @@
     "markdownlint-cli2": "^0.3.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.60.2",
-    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-cleanup": "^3.2.1",
     "ts-node": "^10.4.0",
     "tslib": "^2.3.1",
     "typedoc": "^0.22.10",

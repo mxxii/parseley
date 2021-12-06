@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.9.1
+
+* Fix namespace parsing;
+* Remove terser, use only `rollup-plugin-cleanup` to condition published files.
+
 ## Version 0.9.0
 
 * Replaced `moo` and `nearley` with my [leac](https://github.com/mxxii/leac) and [peberminta](https://github.com/mxxii/peberminta) packages. Now `parseley` with all dependencies are TypeScript, dual CommonJS/ES module packages;
