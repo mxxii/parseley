@@ -1,6 +1,6 @@
 
-import { createLexer, Token } from 'https://deno.land/x/leac@v0.5.0/leac.ts';
-import * as p from 'https://deno.land/x/peberminta@v0.5.4/core.ts';
+import { createLexer, Token } from 'https://deno.land/x/leac@v0.5.1/leac.ts';
+import * as p from 'https://deno.land/x/peberminta@v0.6.0/core.ts';
 
 import * as ast from './ast.ts';
 

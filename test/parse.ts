@@ -12,13 +12,13 @@ test('should produce equal AST inside a list and without a list', t => {
 });
 
 test('should throw when parsing commas with parse1', t => {
-  const input = 'a,\r\nb ,\tp';
+  const input = 'a,b , p';
   const ast1 = parse(input);
   t.is(ast1.list.length, 3);
-  const error = t.throws(() => {
-    parse1(input);
-  });
-  t.true(error.message.includes('only partially parsed, stopped at offset 1!'));
+  t.throws(
+    () => { parse1(input); },
+    { message: 'The input "a,b , p" was only partially parsed, stopped at offset 1!\na,b , p\n ^' }
+  );
 });
 
 test('should parse attribute value selectors with different matchers', t => {
@@ -60,8 +60,8 @@ test('should throw when parsing pseudo-elements or pseudo-classes', t => {
   t.throws(() => {
     parse(input2);
   });
-  const error = t.throws(() => {
-    parse(input3);
-  });
-  t.true(error.message.includes('only partially tokenized, stopped at offset 1!'));
+  t.throws(
+    () => { parse(input3); },
+    { message: 'The input "a:not(.foo)" was only partially tokenized, stopped at offset 1!\na:not(.foo)\n ^' }
+  );
 });
