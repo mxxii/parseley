@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.10.0
+
+* Bump dependencies - fix "./core module cannot be found" issue.
+
 ## Version 0.9.1
 
 * Fix namespace parsing;
