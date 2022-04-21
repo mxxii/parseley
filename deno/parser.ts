@@ -1,6 +1,6 @@
 
 import { createLexer, Token } from 'https://deno.land/x/leac@v0.5.1/leac.ts';
-import * as p from 'https://deno.land/x/peberminta@v0.6.0/core.ts';
+import * as p from 'https://deno.land/x/peberminta@v0.7.0/core.ts';
 
 import * as ast from './ast.ts';
 
@@ -72,7 +72,7 @@ const namespace_: p.Parser<Token,unknown,string> = p.left(
   literal('|')
 );
 
-const qualifiedName_: p.Parser<Token,unknown,{ name: string, namespace: string | null }> = p.choice(
+const qualifiedName_: p.Parser<Token,unknown,{ name: string, namespace: string | null }> = p.eitherOr(
   p.ab(
     namespace_,
     identifier_,
@@ -84,7 +84,7 @@ const qualifiedName_: p.Parser<Token,unknown,{ name: string, namespace: string |
   )
 );
 
-const uniSelector_: p.Parser<Token,unknown,ast.UniversalSelector> = p.choice(
+const uniSelector_: p.Parser<Token,unknown,ast.UniversalSelector> = p.eitherOr(
   p.ab(
     namespace_,
     literal('*'),
@@ -134,7 +134,7 @@ const attrModifier_: p.Parser<Token,unknown,'i'|'s'>
     return undefined;
   });
 
-const attrValue_: p.Parser<Token,unknown,{ value: string, modifier: 'i' | 's' | null }> = p.choice(
+const attrValue_: p.Parser<Token,unknown,{ value: string, modifier: 'i' | 's' | null }> = p.eitherOr(
   p.ab(
     string_,
     p.option(
@@ -193,12 +193,12 @@ const attrValueSelector_: p.Parser<Token,unknown,ast.AttributeValueSelector> = p
   literal(']')
 );
 
-const attrSelector_ = p.choice(
+const attrSelector_ = p.eitherOr(
   attrPresenceSelector_ as p.Parser<Token,unknown,ast.AttributePresenceSelector|ast.AttributeValueSelector>,
   attrValueSelector_
 );
 
-const typeSelector_ = p.choice(
+const typeSelector_ = p.eitherOr(
   uniSelector_ as p.Parser<Token,unknown,ast.TagSelector|ast.UniversalSelector>,
   tagSelector_
 );
@@ -210,7 +210,7 @@ const subclassSelector_ = p.choice(
 );
 
 const compoundSelector_: p.Parser<Token,unknown,ast.CompoundSelector> = p.map(
-  p.choice(
+  p.eitherOr(
     p.flatten(typeSelector_, p.many(subclassSelector_)),
     p.many1(subclassSelector_)
   ),
@@ -230,7 +230,7 @@ const combinator_: p.Parser<Token,unknown,'>' | '+' | '~' | '||'> = p.choice(
   p.ab(literal('|'), literal('|'), () => '||')
 );
 
-const combinatorSeparator_: p.Parser<Token,unknown,' ' | '>' | '+' | '~' | '||'> = p.choice(
+const combinatorSeparator_: p.Parser<Token,unknown,' ' | '>' | '+' | '~' | '||'> = p.eitherOr(
   optionallySpaced(combinator_),
   p.map(whitespace_, () => ' ')
 );
