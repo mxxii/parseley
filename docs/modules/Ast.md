@@ -2,7 +2,7 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [AttributePresenceSelector](Ast.md#attributepresenceselector)
 - [AttributeValueSelector](Ast.md#attributevalueselector)
@@ -17,7 +17,7 @@
 - [TagSelector](Ast.md#tagselector)
 - [UniversalSelector](Ast.md#universalselector)
 
-## Type aliases
+## Type Aliases
 
 ### AttributePresenceSelector
 
