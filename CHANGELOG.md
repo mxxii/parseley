@@ -1,8 +1,9 @@
 # Changelog
 
-## Unreleased
+## Version 0.11.0
 
-Targeting Node.js version 14 and ES2020.
+* Targeting Node.js version 14 and ES2020;
+* Now should be discoverable with [denoify](https://github.com/garronej/denoify).
 
 ## Version 0.10.0
 
