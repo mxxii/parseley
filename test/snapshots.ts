@@ -39,3 +39,7 @@ test('compound selector', snapshotMacro1, 'p.class#id[attr][attr2^=value]');
 test('complex selector (with combinators)', snapshotMacro1, '.foo || .bar .baz + .qux');
 
 test('list selector', snapshotMacro, '.foo,.bar,.baz');
+
+test('non-ascii and escape sequences', snapshotMacro1, '.♫ .\\" .\\22\\22 \\.22 .\\000022 22\\ \\+\\ 22\\ ');
+
+test('emoji in selectors', snapshotMacro1, '.👩‍🚀\\d83d\\dc69\\200d\\d83d\\de80 \\1f469\\200d\\1f680');

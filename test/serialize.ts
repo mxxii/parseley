@@ -52,12 +52,17 @@ test('attribute value with single quotes', serializeMacro,
 
 test('attribute value containing a double quote inside', serializeMacro,
   `[attr^='value"']`,
-  `[attr^='value"']`
+  `[attr^="value\\""]`
 );
 
 test('attribute value containing single and double quote inside', serializeMacro,
   `[attr^='value\\'"']`,
-  `[attr^="value\\'\\""]`
+  `[attr^="value'\\""]`
+);
+
+test('classes and ids with escape sequences', serializeMacro,
+  `#♫ #\\. .\\# .a-_ .\\31 .-\\32 .\\2d .\\00\\01\\1f\\7f`,
+  `#♫ #\\. .\\# .a-_ .\\31 .-\\32 .\\-.�\\1 \\1f \\7f `
 );
 
 test('order inside compound selector', serializeMacro,

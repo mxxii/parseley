@@ -14,5 +14,10 @@
       "json",
       "jsonc",
       "json5"
+    ],
+    "cSpell.words": [
+      "nmchar",
+      "nmstart",
+      "nonascii"
     ]
   }

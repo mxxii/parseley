@@ -1,18 +1,32 @@
 
 import { createLexer, Token } from 'https://deno.land/x/leac@v0.6.0/mod.ts';
-import * as p from 'https://deno.land/x/peberminta@v0.8.0/mod.ts';
+import * as p from 'https://deno.land/x/peberminta@v0.9.0/mod.ts';
 
 import * as ast from './ast.ts';
 
 
 // Lexer / tokenizer
 
-const lex = createLexer([
-  { name: 'ws', regex: /[ \t\r\n\f]+/ },
-  { name: 'idn', regex: /[a-zA-Z_-][a-zA-Z0-9_-]*/ },
-  { name: '#id', regex: /#[a-zA-Z0-9_-]+/ },
-  { name: 'str1', regex: /'(?:\\['\\]|[^\n'\\])*'/ },
-  { name: 'str2', regex: /"(?:\\["\\]|[^\n"\\])*"/ },
+// https://www.w3.org/TR/selectors-3/#lex
+
+const ws = `(?:[ \\t\\r\\n\\f]*)`;
+const nl = `(?:\\n|\\r\\n|\\r|\\f)`;
+const nonascii = `[^\\x00-\\x7F]`;
+const unicode = `(?:\\\\[0-9a-f]{1,6}(?:\\r\\n|[ \\n\\r\\t\\f])?)`;
+const escape = `(?:\\\\[^\\n\\r\\f0-9a-f])`;
+const nmstart = `(?:[_a-z]|${nonascii}|${unicode}|${escape})`;
+const nmchar = `(?:[_a-z0-9-]|${nonascii}|${unicode}|${escape})`;
+const name = `(?:${nmchar}+)`;
+const ident = `(?:[-]?${nmstart}${nmchar}*)`;
+const string1 = `'([^\\n\\r\\f\\\\']|\\\\${nl}|${nonascii}|${unicode}|${escape})*'`;
+const string2 = `"([^\\n\\r\\f\\\\"]|\\\\${nl}|${nonascii}|${unicode}|${escape})*"`;
+
+const lexSelector = createLexer([
+  { name: 'ws', regex: new RegExp(ws) },
+  { name: 'hash', regex: new RegExp(`#${name}`, 'i') },
+  { name: 'ident', regex: new RegExp(ident, 'i') },
+  { name: 'str1', regex: new RegExp(string1, 'i') },
+  { name: 'str2', regex: new RegExp(string2, 'i') },
   { name: '*' },
   { name: '.' },
   { name: ',' },
@@ -30,6 +44,12 @@ const lex = createLexer([
   // { name: ')' },
 ]);
 
+const lexEscapedString = createLexer([
+  { name: 'unicode', regex: new RegExp(unicode, 'i') },
+  { name: 'escape', regex: new RegExp(escape, 'i') },
+  { name: 'any', regex: new RegExp('[\\s\\S]', 'i') }
+]);
+
 
 function sumSpec (
   [a0, a1, a2]: ast.Specificity,
@@ -43,7 +63,30 @@ function sumAllSpec (ss: ast.Specificity[]): ast.Specificity {
 }
 
 
-// Build up the selector parser from smaller, simpler parsers
+// Build up the escaped string parser
+
+const unicodeEscapedSequence_: p.Parser<Token,unknown,string>
+  = p.token((t) => t.name === 'unicode' ? String.fromCodePoint(parseInt(t.text.slice(1), 16)) : undefined);
+
+const escapedSequence_: p.Parser<Token,unknown,string>
+  = p.token((t) => t.name === 'escape' ? t.text.slice(1) : undefined);
+
+const anyChar_: p.Parser<Token,unknown,string>
+  = p.token((t) => t.name === 'any' ? t.text : undefined);
+
+const escapedString_: p.Matcher<Token,unknown,string> = p.map(
+  p.many(p.or(unicodeEscapedSequence_, escapedSequence_, anyChar_)),
+  (cs) => cs.join('')
+);
+
+function unescape (escapedString: string): string {
+  const lexerResult = lexEscapedString(escapedString);
+  const result = escapedString_({ tokens: lexerResult.tokens, options: undefined }, 0);
+  return result.value;
+}
+
+
+// Build up the selector parser
 
 function literal (name: string): p.Parser<Token,unknown,true> {
   return p.token((t) => t.name === name ? true : undefined);
@@ -59,13 +102,13 @@ function optionallySpaced<TValue> (parser: p.Parser<Token,unknown,TValue>) {
 }
 
 const identifier_: p.Parser<Token,unknown,string>
-  = p.token((t) => t.name === 'idn' ? t.text : undefined);
+  = p.token((t) => t.name === 'ident' ? unescape(t.text) : undefined);
 
 const hashId_: p.Parser<Token,unknown,string>
-  = p.token((t) => t.name === '#id' ? t.text.slice(1) : undefined);
+  = p.token((t) => t.name === 'hash' ? unescape(t.text.slice(1)) : undefined);
 
 const string_: p.Parser<Token,unknown,string>
-  = p.token((t) => t.name.startsWith('str') ? t.text.slice(1, -1) : undefined);
+  = p.token((t) => t.name.startsWith('str') ? unescape(t.text.slice(1, -1)) : undefined);
 
 const namespace_: p.Parser<Token,unknown,string> = p.left(
   p.option(identifier_, ''),
@@ -127,7 +170,7 @@ const idSelector_: p.Parser<Token,unknown,ast.IdSelector> = p.map(
 
 const attrModifier_: p.Parser<Token,unknown,'i'|'s'>
   = p.token((t) => {
-    if (t.name === 'idn') {
+    if (t.name === 'ident') {
       if (t.text === 'i' || t.text === 'I') { return 'i'; }
       if (t.text === 's' || t.text === 'S') { return 's'; }
     }
@@ -258,7 +301,7 @@ const listSelector_: p.Parser<Token,unknown,ast.ListSelector> = p.leftAssoc2(
 // Complete parser
 
 function parse_<TValue> (parser: p.Parser<Token,unknown,TValue>, str: string): TValue {
-  const lexerResult = lex(str);
+  const lexerResult = lexSelector(str);
   if (!lexerResult.complete) {
     throw new Error(
       `The input "${str}" was only partially tokenized, stopped at offset ${lexerResult.offset}!\n` +
