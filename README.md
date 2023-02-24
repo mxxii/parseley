@@ -49,9 +49,9 @@ import * as parseley from 'https://deno.land/x/parseley@.../parseley.ts';
 
 ```js
 const parseley = require('parseley');
-const util = require('util');
+const util = require('node:util');
 
-const str = 'div#id1 > .class1[attr1]';
+const str = 'div#id1 > .class2.class1[attr1]';
 
 const ast = parseley.parse1(str);
 console.log(util.inspect(ast, { breakLength: 45, depth: null }));
@@ -67,29 +67,50 @@ console.log(`Normalized: '${normalized}'`);
 <details><summary>Example output</summary>
 
 ```text
-{ type: 'compound',
-  list:
-   [ { type: 'class',
-       name: 'class1',
-       specificity: [ 0, 1, 0 ] },
-     { type: 'attrPresence',
-       name: 'attr1',
-       namespace: null,
-       specificity: [ 0, 1, 0 ] },
-     { type: 'combinator',
-       combinator: '>',
-       left:
-        { type: 'compound',
-          list:
-           [ { type: 'tag',
-               name: 'div',
-               namespace: null,
-               specificity: [ 0, 0, 1 ] },
-             { type: 'id',
-               name: 'id1',
-               specificity: [ 1, 0, 0 ] } ],
-          specificity: [ 1, 0, 1 ] } } ],
-  specificity: [ 1, 2, 1 ] }
+{
+  type: 'compound',
+  list: [
+    {
+      type: 'class',
+      name: 'class2',
+      specificity: [ 0, 1, 0 ]
+    },
+    {
+      type: 'class',
+      name: 'class1',
+      specificity: [ 0, 1, 0 ]
+    },
+    {
+      type: 'attrPresence',
+      name: 'attr1',
+      namespace: null,
+      specificity: [ 0, 1, 0 ]
+    },
+    {
+      type: 'combinator',
+      combinator: '>',
+      left: {
+        type: 'compound',
+        list: [
+          {
+            type: 'tag',
+            name: 'div',
+            namespace: null,
+            specificity: [ 0, 0, 1 ]
+          },
+          {
+            type: 'id',
+            name: 'id1',
+            specificity: [ 1, 0, 0 ]
+          }
+        ],
+        specificity: [ 1, 0, 1 ]
+      },
+      specificity: [ 1, 0, 1 ]
+    }
+  ],
+  specificity: [ 1, 3, 1 ]
+}
 Serialized: 'div#id1>.class2.class1[attr1]'
 Normalized: 'div#id1>.class1.class2[attr1]'
 ```
