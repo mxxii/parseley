@@ -41,7 +41,7 @@
     "build": "npm run clean && npm run build:rollup && npm run build:types && npm run build:docs && npm run build:deno",
     "checkAll": "npm run lint && npm test",
     "clean": "rimraf lib",
-    "example": "node ./example/example.cjs",
+    "example": "node ./example/example.mjs",
     "lint:eslint": "eslint .",
     "lint:md": "markdownlint-cli2",
     "lint": "npm run lint:eslint && npm run lint:md",

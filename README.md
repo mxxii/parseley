@@ -48,19 +48,19 @@ import * as parseley from 'https://deno.land/x/parseley@.../parseley.ts';
 ## Usage example
 
 ```js
-const parseley = require('parseley');
-const util = require('node:util');
+import { parse1, serialize, normalize } from 'parseley';
+import { inspect } from 'node:util';
 
 const str = 'div#id1 > .class2.class1[attr1]';
 
-const ast = parseley.parse1(str);
-console.log(util.inspect(ast, { breakLength: 45, depth: null }));
+const ast = parse1(str);
+console.log(inspect(ast, { breakLength: 45, depth: null }));
 
-const serialized = parseley.serialize(ast);
+const serialized = serialize(ast);
 console.log(`Serialized: '${serialized}'`);
 
-parseley.normalize(ast);
-const normalized = parseley.serialize(ast);
+normalize(ast);
+const normalized = serialize(ast);
 console.log(`Normalized: '${normalized}'`);
 ```
 
