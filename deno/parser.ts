@@ -301,6 +301,9 @@ const listSelector_: p.Parser<Token,unknown,ast.ListSelector> = p.leftAssoc2(
 // Complete parser
 
 function parse_<TValue> (parser: p.Parser<Token,unknown,TValue>, str: string): TValue {
+  if (!(typeof str === 'string' || (str as unknown) instanceof String)) {
+    throw new Error('Expected a selector string. Actual input is not a string!');
+  }
   const lexerResult = lexSelector(str);
   if (!lexerResult.complete) {
     throw new Error(

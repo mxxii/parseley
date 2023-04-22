@@ -49,6 +49,24 @@ test('should compute specificity', t => {
   t.deepEqual(ast2.specificity, [2, 4, 2]);
 });
 
+test('should throw when trying to parse anything but a string', t => {
+  const input1 = null;
+  const input2 = 123;
+  const input3 = {};
+  t.throws(
+    () => { parse(input1 as unknown as string); },
+    { message: 'Expected a selector string. Actual input is not a string!' }
+  );
+  t.throws(
+    () => { parse(input2 as unknown as string); },
+    { message: 'Expected a selector string. Actual input is not a string!' }
+  );
+  t.throws(
+    () => { parse(input3 as unknown as string); },
+    { message: 'Expected a selector string. Actual input is not a string!' }
+  );
+});
+
 // Note: This is a subject for improvement in future versions.
 test('should throw when parsing pseudo-elements or pseudo-classes', t => {
   const input1 = 'a::before';
