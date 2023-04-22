@@ -119,7 +119,7 @@ const qualifiedName_: p.Parser<Token,unknown,{ name: string, namespace: string |
   p.ab(
     namespace_,
     identifier_,
-    (ns, name) => ({ name: name, namespace: ns as string | null })
+    (ns, name) => ({ name: name, namespace: ns })
   ),
   p.map(
     identifier_,
@@ -131,7 +131,7 @@ const uniSelector_: p.Parser<Token,unknown,ast.UniversalSelector> = p.eitherOr(
   p.ab(
     namespace_,
     literal('*'),
-    (ns) => ({ type: 'universal', namespace: ns as string | null, specificity: [0, 0, 0] })
+    (ns) => ({ type: 'universal', namespace: ns, specificity: [0, 0, 0] })
   ),
   p.map(
     literal('*'),
@@ -237,12 +237,12 @@ const attrValueSelector_: p.Parser<Token,unknown,ast.AttributeValueSelector> = p
 );
 
 const attrSelector_ = p.eitherOr(
-  attrPresenceSelector_ as p.Parser<Token,unknown,ast.AttributePresenceSelector|ast.AttributeValueSelector>,
+  attrPresenceSelector_,
   attrValueSelector_
 );
 
 const typeSelector_ = p.eitherOr(
-  uniSelector_ as p.Parser<Token,unknown,ast.TagSelector|ast.UniversalSelector>,
+  uniSelector_,
   tagSelector_
 );
 
