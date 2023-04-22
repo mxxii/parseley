@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.12.1
+
+* Runtime check for input of `parse` and `parse1` to be a string.
+
 ## Version 0.12.0
 
 * Support for escape sequences according to specifications ([#97](https://github.com/mxxii/parseley/issues/97)).
