@@ -6,17 +6,6 @@
   "compilerOptions": {
     "outDir": "./lib"
   },
-  "typedocOptions": {
-    "disableSources": true,
-    "entryDocument": "index.md",
-    "entryPoints": ["src/parseley.ts"],
-    "githubPages": false,
-    "hideBreadcrumbs": true,
-    "includeVersion": true,
-    "name": "API documentation",
-    "readme": "none",
-    "out": "docs"
-  },
   "ts-node": {
     "compilerOptions": {
       "module": "ESNext",
