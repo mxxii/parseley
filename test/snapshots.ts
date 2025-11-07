@@ -1,18 +1,18 @@
-import test, {ExecutionContext} from 'ava';
+import test, { type ExecutionContext } from 'ava';
 
-import { parse, parse1 } from '../src/parseley';
+import { parse, parse1 } from '../src/parseley.ts';
 
-function snapshotMacro(t: ExecutionContext, input: string) {
+function snapshotMacro (t: ExecutionContext, input: string) {
   t.snapshot(
     parse(input),
-    `\`parse('${input}')\``
+    `\`parse('${input}')\``,
   );
 }
 
-function snapshotMacro1(t: ExecutionContext, input: string) {
+function snapshotMacro1 (t: ExecutionContext, input: string) {
   t.snapshot(
     parse1(input),
-    `\`parse1('${input}')\``
+    `\`parse1('${input}')\``,
   );
 }
 

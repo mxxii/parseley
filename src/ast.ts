@@ -1,5 +1,11 @@
 
 /**
+ * Abstract Syntax Tree (AST) for CSS selectors.
+ *
+ * @packageDocumentation
+ */
+
+/**
  * Specificity as defined by Selectors spec.
  *
  * {@link https://www.w3.org/TR/selectors/#specificity}
@@ -20,9 +26,9 @@ export type Specificity = [number, number, number];
  * for simplicity of processing.
  */
 export type UniversalSelector = {
-  type: 'universal',
-  namespace: string | null,
-  specificity: Specificity
+  type: 'universal';
+  namespace: string | null;
+  specificity: Specificity;
 };
 
 /**
@@ -34,36 +40,36 @@ export type UniversalSelector = {
  * for simplicity of processing.
  */
 export type TagSelector = {
-  type: 'tag',
-  name: string,
-  namespace: string | null,
-  specificity: Specificity
+  type: 'tag';
+  name: string;
+  namespace: string | null;
+  specificity: Specificity;
 };
 
 /**
- * Class selector.
+ * Class selector (`.class`).
  *
  * {@link https://www.w3.org/TR/selectors/#class-html}
  */
 export type ClassSelector = {
-  type: 'class',
-  name: string,
-  specificity: Specificity
+  type: 'class';
+  name: string;
+  specificity: Specificity;
 };
 
 /**
- * Id selector.
+ * Id selector (`#id`).
  *
  * {@link https://www.w3.org/TR/selectors/#id-selectors}
  */
 export type IdSelector = {
-  type: 'id',
-  name: string,
-  specificity: Specificity
+  type: 'id';
+  name: string;
+  specificity: Specificity;
 };
 
 /**
- * Attribute presence selector.
+ * Attribute presence selector (`[attr]`).
  *
  * {@link https://www.w3.org/TR/selectors/#attribute-selectors}
  *
@@ -71,14 +77,14 @@ export type IdSelector = {
  * for simplicity of processing.
  */
 export type AttributePresenceSelector = {
-  type: 'attrPresence',
-  name: string,
-  namespace: string | null,
-  specificity: Specificity
+  type: 'attrPresence';
+  name: string;
+  namespace: string | null;
+  specificity: Specificity;
 };
 
 /**
- * Attribute value selector.
+ * Attribute value selector (`[attr=value]`).
  *
  * {@link https://www.w3.org/TR/selectors/#attribute-selectors}
  *
@@ -86,13 +92,13 @@ export type AttributePresenceSelector = {
  * for simplicity of processing.
  */
 export type AttributeValueSelector = {
-  type: 'attrValue',
-  name: string,
-  namespace: string | null,
-  matcher: '=' | '~=' | '|=' | '^=' | '$=' | '*=',
-  value: string,
-  modifier: 'i' | 's' | null,
-  specificity: Specificity
+  type: 'attrValue';
+  name: string;
+  namespace: string | null;
+  matcher: '=' | '~=' | '|=' | '^=' | '$=' | '*=';
+  value: string;
+  modifier: 'i' | 's' | null;
+  specificity: Specificity;
 };
 
 /**
@@ -101,10 +107,10 @@ export type AttributeValueSelector = {
  * {@link https://www.w3.org/TR/selectors/#combinators}
  */
 export type Combinator = {
-  type: 'combinator',
-  combinator: ' ' | '+' | '>' | '~' | '||',
-  left: CompoundSelector,
-  specificity: Specificity
+  type: 'combinator';
+  combinator: ' ' | '+' | '>' | '~' | '||';
+  left: CompoundSelector;
+  specificity: Specificity;
 };
 
 /**
@@ -120,12 +126,12 @@ export type Combinator = {
  */
 export type SimpleSelector
   = UniversalSelector
-  | TagSelector
-  | ClassSelector
-  | IdSelector
-  | AttributePresenceSelector
-  | AttributeValueSelector
-  | Combinator;
+    | TagSelector
+    | ClassSelector
+    | IdSelector
+    | AttributePresenceSelector
+    | AttributeValueSelector
+    | Combinator;
 
 /**
  * Compound selector - a set of conditions describing a single element.
@@ -143,9 +149,9 @@ export type SimpleSelector
  * the last entry in the list of inner selectors.
  */
 export type CompoundSelector = {
-  type: 'compound',
-  list: SimpleSelector[],
-  specificity: Specificity
+  type: 'compound';
+  list: SimpleSelector[];
+  specificity: Specificity;
 };
 
 /**
@@ -157,8 +163,8 @@ export type CompoundSelector = {
  * a single specificity value doesn't make sense for it and therefore absent.
  */
 export type ListSelector = {
-  type: 'list',
-  list: CompoundSelector[]
+  type: 'list';
+  list: CompoundSelector[];
 };
 
 /**
@@ -166,5 +172,5 @@ export type ListSelector = {
  */
 export type Selector
   = ListSelector
-  | CompoundSelector
-  | SimpleSelector;
+    | CompoundSelector
+    | SimpleSelector;

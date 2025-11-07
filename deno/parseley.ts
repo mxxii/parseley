@@ -1,7 +1,7 @@
 
-import * as Ast from './ast.ts';
+import type * as Ast from './ast.ts';
 
-export { Ast };
+export { type Ast };
 export { parse, parse1 } from './parser.ts';
 
 /**
@@ -31,12 +31,10 @@ export function serialize (selector: Ast.Selector): string {
     case 'combinator':
       return serialize(selector.left) + selector.combinator;
     case 'compound':
-      return selector.list.reduce((acc,node) => {
-        if (node.type === 'combinator') {
-          return serialize(node) + acc;
-        } else {
-          return acc + serialize(node);
-        }
+      return selector.list.reduce((acc, node) => {
+        return node.type === 'combinator'
+          ? serialize(node) + acc
+          : acc + serialize(node);
       }, '');
     case 'list':
       return selector.list.map(serialize).join(',');
@@ -52,7 +50,6 @@ function _serNs (ns: string | null): string {
 // https://w3c.github.io/csswg-drafts/cssom/#serialize-an-identifier
 
 function _codePoint (char: string) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return `\\${char.codePointAt(0)!.toString(16)} `;
 }
 
@@ -60,14 +57,14 @@ function _serIdent (str: string): string {
   return str.replace(
     // eslint-disable-next-line no-control-regex
     /(^[0-9])|(^-[0-9])|(^-$)|([-0-9a-zA-Z_]|[^\x00-\x7F])|(\x00)|([\x01-\x1f]|\x7f)|([\s\S])/g,
-    (m,d1,d2,hy,safe,nl,ctrl,other) =>
-      d1 ? _codePoint(d1 as string) :
-        d2 ? '-' + _codePoint((d2 as string).slice(1)) :
-          hy ? '\\-' :
-            safe ? safe as string :
-              nl ? '\ufffd' :
-                ctrl ? _codePoint(ctrl as string) :
-                  '\\' + (other as string)
+    (_m, d1, d2, hy, safe, nl, ctrl, other) =>
+      d1 ? _codePoint(d1 as string)
+      : d2 ? '-' + _codePoint((d2 as string).slice(1))
+      : hy ? '\\-'
+      : safe ? safe as string
+      : nl ? '\ufffd'
+      : ctrl ? _codePoint(ctrl as string)
+      : '\\' + (other as string),
   );
 }
 
@@ -75,11 +72,11 @@ function _serStr (str: string): string {
   return str.replace(
     // eslint-disable-next-line no-control-regex
     /(")|(\\)|(\x00)|([\x01-\x1f]|\x7f)/g,
-    (m,dq,bs,nl,ctrl) =>
-      dq ? '\\"' :
-        bs ? '\\\\' :
-          nl ? '\ufffd' :
-            _codePoint(ctrl as string)
+    (_m, dq, bs, nl, ctrl) =>
+      dq ? '\\"'
+      : bs ? '\\\\'
+      : nl ? '\ufffd'
+      : _codePoint(ctrl as string),
   );
 }
 
@@ -99,7 +96,7 @@ export function normalize (selector: Ast.Selector): Ast.Selector {
     case 'compound': {
       selector.list.forEach(normalize);
       selector.list.sort(
-        (a, b) => _compareArrays(_getSelectorPriority(a), _getSelectorPriority(b))
+        (a, b) => _compareSelectorPriority(_getSelectorPriority(a), _getSelectorPriority(b)),
       );
       break;
     }
@@ -110,7 +107,7 @@ export function normalize (selector: Ast.Selector): Ast.Selector {
     case 'list': {
       selector.list.forEach(normalize);
       selector.list.sort(
-        (a, b) => (serialize(a) < serialize(b)) ? -1 : 1
+        (a, b) => (serialize(a) < serialize(b)) ? -1 : 1,
       );
       break;
     }
@@ -140,6 +137,16 @@ function _getSelectorPriority (selector: Ast.SimpleSelector): [number, string?] 
   }
 }
 
+function _compareSelectorPriority (a: [number, string?], b: [number, string?]): number {
+  if (a[0] !== b[0]) { return a[0] < b[0] ? -1 : 1; }
+  const aStr = a[1];
+  const bStr = b[1];
+  if (aStr === bStr) { return 0; }
+  if (aStr === undefined) { return -1; }
+  if (bStr === undefined) { return 1; }
+  return (aStr < bStr) ? -1 : 1;
+}
+
 /**
  * Compare selectors based on their specificity.
  *
@@ -150,9 +157,9 @@ function _getSelectorPriority (selector: Ast.SimpleSelector): [number, string?] 
  */
 export function compareSelectors (
   a: Ast.SimpleSelector | Ast.CompoundSelector,
-  b: Ast.SimpleSelector | Ast.CompoundSelector
+  b: Ast.SimpleSelector | Ast.CompoundSelector,
 ): number {
-  return _compareArrays(a.specificity, b.specificity);
+  return compareSpecificity(a.specificity, b.specificity);
 }
 
 /**
@@ -165,17 +172,7 @@ export function compareSelectors (
  * @param b - Second specificity value.
  */
 export function compareSpecificity (a: Ast.Specificity, b: Ast.Specificity): number {
-  return _compareArrays(a, b);
-}
-
-function _compareArrays (a: unknown[], b: unknown[]): number {
-  if (!Array.isArray(a) || !Array.isArray(b)) {
-    throw new Error('Arguments must be arrays.');
-  }
-  const shorter = (a.length < b.length) ? a.length : b.length;
-  for (let i = 0; i < shorter; i++) {
-    if (a[i] === b[i]) { continue; }
-    return (a[i] < b[i]) ? -1 : 1;
-  }
-  return a.length - b.length;
+  if (a[0] !== b[0]) { return a[0] < b[0] ? -1 : 1; }
+  if (a[1] !== b[1]) { return a[1] < b[1] ? -1 : 1; }
+  return a[2] < b[2] ? -1 : (a[2] > b[2] ? 1 : 0);
 }

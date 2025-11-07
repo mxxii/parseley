@@ -1,16 +1,26 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json",
+  "extends": "@tsconfig/node20/tsconfig.json",
   "include": [
     "src/**/*.ts"
   ],
   "compilerOptions": {
-    "outDir": "./lib"
+    "allowImportingTsExtensions": true,
+    "declaration": true,
+    "erasableSyntaxOnly": true,
+    "isolatedDeclarations": true,
+    "isolatedModules": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "outDir": "./lib",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "exactOptionalPropertyTypes": true,
+    "useUnknownInCatchVariables": true,
   },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "ESNext",
-      "esModuleInterop": true,
-      "moduleResolution": "Node"
-    }
-  }
 }
