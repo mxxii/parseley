@@ -19,11 +19,20 @@
   },
   "homepage": "https://github.com/mxxii/parseley",
   "author": "KillyMXI",
-  "funding": "https://ko-fi.com/killymxi",
+  "funding": "https://github.com/sponsors/KillyMXI",
   "license": "MIT",
   "exports": {
-    "import": "./lib/parseley.mjs",
-    "require": "./lib/parseley.cjs"
+    ".": {
+      "import": {
+        "types": "./lib/parseley.d.mts",
+        "default": "./lib/parseley.mjs"
+      },
+      "require": {
+        "types": "./lib/parseley.d.cts",
+        "default": "./lib/parseley.cjs"
+      }
+    },
+    "./package.json": "./package.json"
   },
   "type": "module",
   "main": "./lib/parseley.cjs",
@@ -65,8 +74,10 @@
     "eslint-plugin-tsdoc": "^0.4.0",
     "markdownlint-cli2": "^0.18.1",
     "rimraf": "^6.1.0",
-    "rollup": "~4.52.5",
+    "rollup": "~4.53.1",
     "rollup-plugin-cleanup": "^3.2.1",
+    "rollup-plugin-delete": "^3.0.1",
+    "rollup-plugin-dts": "^6.2.3",
     "ts-blank-space": "^0.6.2",
     "tslib": "^2.8.1",
     "typedoc": "~0.28.14",
