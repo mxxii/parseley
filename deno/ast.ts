@@ -2,6 +2,10 @@
 /**
  * Abstract Syntax Tree (AST) for CSS selectors.
  *
+ * Does not preserve original textual representation such as spacing, quoting style, etc.
+ *
+ * Does preserve all information necessary to serialize back to equivalent selector string.
+ *
  * @packageDocumentation
  */
 
@@ -28,7 +32,7 @@ export type Specificity = [number, number, number];
 export type UniversalSelector = {
   type: 'universal';
   namespace: string | null;
-  specificity: Specificity;
+  specificity: [0, 0, 0];
 };
 
 /**
@@ -43,7 +47,7 @@ export type TagSelector = {
   type: 'tag';
   name: string;
   namespace: string | null;
-  specificity: Specificity;
+  specificity: [0, 0, 1];
 };
 
 /**
@@ -54,7 +58,7 @@ export type TagSelector = {
 export type ClassSelector = {
   type: 'class';
   name: string;
-  specificity: Specificity;
+  specificity: [0, 1, 0];
 };
 
 /**
@@ -65,7 +69,7 @@ export type ClassSelector = {
 export type IdSelector = {
   type: 'id';
   name: string;
-  specificity: Specificity;
+  specificity: [1, 0, 0];
 };
 
 /**
@@ -80,7 +84,7 @@ export type AttributePresenceSelector = {
   type: 'attrPresence';
   name: string;
   namespace: string | null;
-  specificity: Specificity;
+  specificity: [0, 1, 0];
 };
 
 /**
@@ -98,8 +102,41 @@ export type AttributeValueSelector = {
   matcher: '=' | '~=' | '|=' | '^=' | '$=' | '*=';
   value: string;
   modifier: 'i' | 's' | null;
+  specificity: [0, 1, 0];
+};
+
+export type PseudoClassSelector = {
+  type: 'pc';
+  name: string;
+  specificity: [0, 1, 0];
+};
+
+export type IsSelector = {
+  type: 'fpc:is';
+  name: string;
+  list: CompoundSelector[];
   specificity: Specificity;
 };
+
+export type WhereSelector = {
+  type: 'fpc:where';
+  name: string;
+  list: CompoundSelector[];
+  specificity: [0, 0, 0];
+};
+
+export type NotSelector = {
+  type: 'fpc:not';
+  name: string;
+  list: CompoundSelector[];
+  specificity: Specificity;
+};
+
+export type FunctionalPseudoClassSelector
+  = IsSelector
+    | WhereSelector
+    | NotSelector;
+
 
 /**
  * Represents a selectors combinator with what's on the left side of it.
@@ -131,6 +168,8 @@ export type SimpleSelector
     | IdSelector
     | AttributePresenceSelector
     | AttributeValueSelector
+    | FunctionalPseudoClassSelector
+    | PseudoClassSelector
     | Combinator;
 
 /**

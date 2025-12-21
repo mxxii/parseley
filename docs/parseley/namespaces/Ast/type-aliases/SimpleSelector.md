@@ -1,4 +1,4 @@
-[**parseley v0.12.1**](../../../../index.md)
+[**parseley v0.13.0**](../../../../index.md)
 
 ***
 
@@ -12,6 +12,8 @@ type SimpleSelector =
   | IdSelector
   | AttributePresenceSelector
   | AttributeValueSelector
+  | FunctionalPseudoClassSelector
+  | PseudoClassSelector
   | Combinator;
 ```
 

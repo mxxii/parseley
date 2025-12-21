@@ -1,6 +1,6 @@
 {
   "name": "parseley",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "description": "CSS selectors parser",
   "keywords": [
     "CSS",
@@ -63,27 +63,27 @@
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^12.3.0",
-    "@stylistic/eslint-plugin": "^5.5.0",
-    "@tsconfig/node20": "^20.1.6",
-    "@types/node": "^20.19.24",
-    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@stylistic/eslint-plugin": "^5.6.1",
+    "@tsconfig/node20": "^20.1.8",
+    "@types/node": "^20.19.27",
+    "@typescript-eslint/eslint-plugin": "^8.50.0",
     "ava": "^6.4.1",
     "denoify": "^1.6.17",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "eslint-plugin-jsonc": "^2.21.0",
-    "eslint-plugin-tsdoc": "^0.4.0",
-    "markdownlint-cli2": "^0.18.1",
-    "rimraf": "^6.1.0",
-    "rollup": "~4.53.1",
+    "eslint-plugin-tsdoc": "^0.5.0",
+    "markdownlint-cli2": "^0.20.0",
+    "rimraf": "^6.1.2",
+    "rollup": "~4.54.0",
     "rollup-plugin-cleanup": "^3.2.1",
-    "rollup-plugin-delete": "^3.0.1",
-    "rollup-plugin-dts": "^6.2.3",
+    "rollup-plugin-delete": "^3.0.2",
+    "rollup-plugin-dts": "^6.3.0",
     "ts-blank-space": "^0.6.2",
     "tslib": "^2.8.1",
-    "typedoc": "~0.28.14",
+    "typedoc": "~0.28.15",
     "typedoc-plugin-markdown": "~4.9.0",
     "typescript": "~5.8.3",
-    "typescript-eslint": "^8.38.0"
+    "typescript-eslint": "^8.50.0"
   },
   "ava": {
     "extensions": {

@@ -2,15 +2,11 @@
 
 ***
 
-# Type Alias: ClassSelector
+# Type Alias: WhereSelector
 
 ```ts
-type ClassSelector = object;
+type WhereSelector = object;
 ```
-
-Class selector (`.class`).
-
-[https://www.w3.org/TR/selectors/#class-html](https://www.w3.org/TR/selectors/#class-html)
 
 ## Properties
 
@@ -22,6 +18,18 @@ Class selector (`.class`).
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+
+<a id="list"></a> `list`
+
+</td>
+<td>
+
+[`CompoundSelector`](CompoundSelector.md)[]
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -42,7 +50,7 @@ Class selector (`.class`).
 </td>
 <td>
 
-\[`0`, `1`, `0`\]
+\[`0`, `0`, `0`\]
 
 </td>
 </tr>
@@ -54,7 +62,7 @@ Class selector (`.class`).
 </td>
 <td>
 
-`"class"`
+`"fpc:where"`
 
 </td>
 </tr>

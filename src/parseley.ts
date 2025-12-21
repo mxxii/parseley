@@ -4,7 +4,7 @@ import type * as Ast from './ast.ts';
 export { type Ast };
 export { parse, parse1 } from './parser.ts';
 export { serialize } from './serializer.ts';
-export { normalize } from './normalizer.ts';
+export { normalize, type NormalizeOptions } from './normalizer.ts';
 
 /**
  * Compare selectors based on their specificity.

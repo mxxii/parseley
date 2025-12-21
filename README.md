@@ -14,11 +14,11 @@
 
 ## Features
 
-* Convert CSS selector strings into objects that are easy to work with;
+- Convert CSS selector strings into objects that are easy to work with;
 
-* Serialize back if needed;
+- Serialize back if needed;
 
-* Get specificity for free.
+- Get specificity for free.
 
 
 ## Changelog
@@ -120,9 +120,8 @@ Normalized: 'div#id1>.class1.class2[attr1]'
 
 ## Documentation
 
-* [Functions](https://github.com/mxxii/parseley/blob/main/docs/index.md)
-* [AST types](https://github.com/mxxii/parseley/blob/main/docs/modules/Ast.md)
-* [Snapshots](https://github.com/mxxii/parseley/blob/main/test/snapshots/snapshots.ts.md)
+- [API](https://github.com/mxxii/parseley/blob/main/docs/index.md)
+- [Snapshots](https://github.com/mxxii/parseley/blob/main/test/snapshots/snapshots.ts.md)
 
 
 ## Input reference
@@ -132,8 +131,6 @@ Normalized: 'div#id1>.class1.class2[attr1]'
 <https://www.w3.org/TR/css-syntax-3/#token-diagrams>
 
 Terminology used in this project is more or less consistent to the spec, with some exceptions made for clarity. The term "type" is way too overloaded in particular, the term "tag" is used where appropriate instead.
-
-Any pseudo elements are left for possible future implementation. I have no immediate need for them and they require some careful consideration.
 
 
 ## Output AST
@@ -146,7 +143,35 @@ Comma-separated selectors might not be needed for every use case. So there are t
 
 Complex selectors are represented in the way that makes the left side to be an another condition on the right side element. This was made with the right-to-left processing direction in mind. One consequence of this is that there is no such thing as a "complex selector" node in the AST hierarchy, but there are "combinator" nodes attached to "compound selector" nodes.
 
+Pseudo-classes and functional pseudo-classes are represented as separate types. All supported functional pseudo-classes have their own types with strongly typed content.
+
 All AST nodes have their specificity computed (except the top-level list of comma-separated selectors where it doesn't really make sense).
+
+
+## Selector type hierarchy
+
+- [Selector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/Selector.md)
+  - [ListSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/ListSelector.md) - comma-separated
+    - _contains CompoundSelector list_
+  - [CompoundSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/CompoundSelector.md) - all simple selectors that apply to the same element
+    - _contains SimpleSelector (incl. Combinator) list_
+  - [SimpleSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/SimpleSelector.md)
+    - [UniversalSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/UniversalSelector.md) - `*`
+    - [TagSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/TagSelector.md) - `div`, etc.
+    - [ClassSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/ClassSelector.md) - `.className`
+    - [IdSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/IdSelector.md) - `#idValue`
+    - [AttributePresenceSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/AttributePresenceSelector.md) - `[attrName]`
+    - [AttributeValueSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/AttributeValueSelector.md) - `[attrName="value"]`, etc.
+    - [FunctionalPseudoClassSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/FunctionalPseudoClassSelector.md)
+      - [IsSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/IsSelector.md) - `:is(...)`
+        - _contains CompoundSelector list_
+      - [WhereSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/WhereSelector.md) - `:where(...)`
+        - _contains CompoundSelector list_
+      - [NotSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/NotSelector.md) - `:not(...)`
+        - _contains CompoundSelector list_
+    - [PseudoClassSelector](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/PseudoClassSelector.md) - `:hover`, etc. - except functional ones
+    - [Combinator](https://github.com/mxxii/parseley/blob/main/docs/parseley/namespaces/Ast/type-aliases/Combinator.md) - ` `, `>`, `+`, `~`, `||`
+      - _contains left CompoundSelector_
 
 
 ## Motivation and inspiration

@@ -39,9 +39,9 @@ const lexSelector = createLexer([
   { name: '~' },
   { name: '^' },
   { name: '$' },
-  // { name: ':' },
-  // { name: '(' },
-  // { name: ')' },
+  { name: ':' },
+  { name: '(' },
+  { name: ')' },
 ]);
 
 const lexEscapedString = createLexer([
@@ -60,6 +60,19 @@ function sumSpec (
 
 function sumAllSpec (ss: ast.Specificity[]): ast.Specificity {
   return ss.reduce(sumSpec, [0, 0, 0]);
+}
+
+function maxSpec (
+  [a0, a1, a2]: ast.Specificity,
+  [b0, b1, b2]: ast.Specificity,
+): ast.Specificity {
+  return (a0 > b0 || (a0 === b0 && (a1 > b1 || (a1 === b1 && a2 >= b2))))
+    ? [a0, a1, a2]
+    : [b0, b1, b2];
+}
+
+function maxAllSpec (ss: ast.Specificity[]): ast.Specificity {
+  return ss.reduce(maxSpec, [0, 0, 0]);
 }
 
 
@@ -236,6 +249,86 @@ const attrValueSelector_: p.Parser<Token, unknown, ast.AttributeValueSelector> =
   literal(']'),
 );
 
+const pseudoClassSelector_: p.Parser<Token, unknown, ast.PseudoClassSelector> = p.abc(
+  literal(':'),
+  identifier_,
+  p.not(p.ahead(literal('('))),
+  (_fullstop, name) => ({
+    type: 'pc',
+    name: name,
+    specificity: [0, 1, 0],
+  }),
+);
+
+function pcLiteral (name: string): p.Parser<Token, unknown, string> {
+  return p.filter(
+    identifier_,
+    id => id.toLowerCase() === name.toLowerCase(),
+  );
+}
+
+function fpcBase<TValue> (
+  name: string,
+  contentParser: p.Parser<Token, unknown, TValue>,
+  contentDesc: string,
+): p.Parser<Token, unknown, { name: string; content: TValue }> {
+  return p.abc(
+    p.middle(
+      literal(':'),
+      pcLiteral(name),
+      p.eitherOr(
+        literal('('),
+        p.error(`Expected opening parenthesis in :${name}()`),
+      ),
+    ),
+    p.eitherOr(
+      optionallySpaced(contentParser),
+      p.error(`Expected ${contentDesc} in :${name}()`),
+    ),
+    p.eitherOr(
+      literal(')'),
+      p.error(`Expected closing parenthesis in :${name}()`),
+    ),
+    (name, content) => ({ name, content }),
+  );
+}
+
+const isSelector_: p.Parser<Token, unknown, ast.IsSelector> = p.map(
+  fpcBase('is', p.recursive(() => listSelector_), 'selector list'),
+  v => ({
+    type: 'fpc:is',
+    name: v.name,
+    list: v.content.list,
+    specificity: maxAllSpec(v.content.list.map(s => s.specificity)),
+  }),
+);
+
+const whereSelector_: p.Parser<Token, unknown, ast.WhereSelector> = p.map(
+  fpcBase('where', p.recursive(() => listSelector_), 'selector list'),
+  v => ({
+    type: 'fpc:where',
+    name: v.name,
+    list: v.content.list,
+    specificity: [0, 0, 0],
+  }),
+);
+
+const notSelector_: p.Parser<Token, unknown, ast.NotSelector> = p.map(
+  fpcBase('not', p.recursive(() => listSelector_), 'selector list'),
+  v => ({
+    type: 'fpc:not',
+    name: v.name,
+    list: v.content.list,
+    specificity: maxAllSpec(v.content.list.map(s => s.specificity)),
+  }),
+);
+
+const functionalPseudoClassSelector_ = p.or<Token, unknown, ast.FunctionalPseudoClassSelector>(
+  isSelector_,
+  whereSelector_,
+  notSelector_,
+);
+
 const attrSelector_ = p.eitherOr(
   attrPresenceSelector_,
   attrValueSelector_,
@@ -246,10 +339,12 @@ const typeSelector_ = p.eitherOr(
   tagSelector_,
 );
 
-const subclassSelector_ = p.choice(
-  idSelector_ as p.Parser<Token, unknown, ast.SimpleSelector>,
+const subclassSelector_ = p.choice<Token, unknown, ast.SimpleSelector>(
+  idSelector_,
   classSelector_,
   attrSelector_,
+  functionalPseudoClassSelector_,
+  pseudoClassSelector_,
 );
 
 const compoundSelector_: p.Parser<Token, unknown, ast.CompoundSelector> = p.map(

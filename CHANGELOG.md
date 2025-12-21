@@ -1,9 +1,23 @@
 # Changelog
 
-## Unpublished
+## Version 0.13.0
 
 - targeting Node 20;
-- ...
+- added simple pseudo-classes support - any pseudo-class with no arguments is now supported;
+- added three functional pseudo-classes support: `:is()`, `:where()`, `:not()`;
+- `normalize()` now accepts an options object (`NormalizeOptions`);
+  - `mode: 'html' | 'xml'` controls case-folding for element (tag) names, attribute names, and namespace prefixes (HTML mode lowercases; XML mode preserves case);
+  - `attributesWithNormalizedValues` enables canonicalization of attribute values:
+    - it is left to the user to provide attribute names for which values are to be treated as case-insensitive by default
+      - Note: in some cases, attribute name might not be sufficient to determine case-sensitivity of its value. For now, this is chosen as good enough for the purposes of this library;
+    - if an attribute selector has modifier `i`, its value is lowercased;
+    - if modifier is omitted (`null`), the value is lowercased only for configured attribute names;
+  - by default, missing modifiers are made explicit (`i` or `s`) for stable, comparable output; this can be disabled with `allowUnspecifiedCaseSensitivityForAttributes`.
+
+Possibly breaking changes:
+
+- `normalize()` output might differ for some selectors;
+- `parse()` now supports more selectors - will return an AST instead of throwing an error for them.
 
 ## Version 0.12.1
 

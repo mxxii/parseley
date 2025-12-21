@@ -7,7 +7,9 @@
     "no-emphasis-as-heading": false,
     "no-inline-html": false,
     "no-multiple-blanks": { "maximum": 2 },
-    "table-pipe-style": false
+    "table-column-style": false,
+    "table-pipe-style": false,
+    "ul-style": { "style": "dash" }
   },
   "globs": [ "**/*.md" ],
   "gitignore": true

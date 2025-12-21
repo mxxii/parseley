@@ -1,17 +1,18 @@
-[**parseley v0.12.1**](../index.md)
+[**parseley v0.13.0**](../index.md)
 
 ***
 
 # Function: normalize()
 
 ```ts
-function normalize(selector: Selector): Selector;
+function normalize(selector: Selector, options: NormalizeOptions): Selector;
 ```
 
-Modifies the given AST **in place** to have all internal arrays
-in a stable order. Returns the AST.
+Modifies the given AST **in place** to a canonical form and stable ordering.
+Returns the AST.
 
-Intended for consistent processing and normalized `serialize()` output.
+Intended for consistent processing, easy comparison of equivalent selectors,
+and normalized `serialize()` output.
 
 ## Parameters
 
@@ -38,6 +39,23 @@ Intended for consistent processing and normalized `serialize()` output.
 <td>
 
 A selector AST object.
+
+</td>
+</tr>
+<tr>
+<td>
+
+`options`
+
+</td>
+<td>
+
+[`NormalizeOptions`](../type-aliases/NormalizeOptions.md)
+
+</td>
+<td>
+
+Normalization options.
 
 </td>
 </tr>

@@ -1,4 +1,4 @@
-[**parseley v0.12.1**](../../../../index.md)
+[**parseley v0.13.0**](../../../../index.md)
 
 ***
 
@@ -57,7 +57,7 @@ for simplicity of processing.
 </td>
 <td>
 
-[`Specificity`](Specificity.md)
+\[`0`, `1`, `0`\]
 
 </td>
 </tr>

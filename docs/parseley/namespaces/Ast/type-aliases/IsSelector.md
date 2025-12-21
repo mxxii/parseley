@@ -2,15 +2,11 @@
 
 ***
 
-# Type Alias: Combinator
+# Type Alias: IsSelector
 
 ```ts
-type Combinator = object;
+type IsSelector = object;
 ```
-
-Represents a selectors combinator with what's on the left side of it.
-
-[https://www.w3.org/TR/selectors/#combinators](https://www.w3.org/TR/selectors/#combinators)
 
 ## Properties
 
@@ -25,24 +21,24 @@ Represents a selectors combinator with what's on the left side of it.
 <tr>
 <td>
 
-<a id="combinator"></a> `combinator`
+<a id="list"></a> `list`
 
 </td>
 <td>
 
-`" "` \| `"+"` \| `">"` \| `"~"` \| "\|\|"
+[`CompoundSelector`](CompoundSelector.md)[]
 
 </td>
 </tr>
 <tr>
 <td>
 
-<a id="left"></a> `left`
+<a id="name"></a> `name`
 
 </td>
 <td>
 
-[`CompoundSelector`](CompoundSelector.md)
+`string`
 
 </td>
 </tr>
@@ -66,7 +62,7 @@ Represents a selectors combinator with what's on the left side of it.
 </td>
 <td>
 
-`"combinator"`
+`"fpc:is"`
 
 </td>
 </tr>

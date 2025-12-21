@@ -1,4 +1,4 @@
-[**parseley v0.12.1**](../../../../index.md)
+[**parseley v0.13.0**](../../../../index.md)
 
 ***
 
@@ -42,7 +42,7 @@ Id selector (`#id`).
 </td>
 <td>
 
-[`Specificity`](Specificity.md)
+\[`1`, `0`, `0`\]
 
 </td>
 </tr>

@@ -2,15 +2,11 @@
 
 ***
 
-# Type Alias: ClassSelector
+# Type Alias: PseudoClassSelector
 
 ```ts
-type ClassSelector = object;
+type PseudoClassSelector = object;
 ```
-
-Class selector (`.class`).
-
-[https://www.w3.org/TR/selectors/#class-html](https://www.w3.org/TR/selectors/#class-html)
 
 ## Properties
 
@@ -54,7 +50,7 @@ Class selector (`.class`).
 </td>
 <td>
 
-`"class"`
+`"pc"`
 
 </td>
 </tr>
