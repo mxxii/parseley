@@ -1,8 +1,8 @@
-**parseley v0.13.0**
+**parseley v0.13.1**
 
 ***
 
-# parseley v0.13.0
+# parseley v0.13.1
 
 ## Namespaces
 

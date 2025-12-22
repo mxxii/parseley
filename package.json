@@ -1,6 +1,6 @@
 {
   "name": "parseley",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "CSS selectors parser",
   "keywords": [
     "CSS",
@@ -37,7 +37,7 @@
   "type": "module",
   "main": "./lib/parseley.cjs",
   "module": "./lib/parseley.mjs",
-  "types": "./lib/parseley.d.ts",
+  "types": "./lib/parseley.d.cts",
   "files": [
     "lib"
   ],

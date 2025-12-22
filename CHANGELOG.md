@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.13.1
+
+- fix minor issue in `package.json` related to types. Unlikely to affect modern usage.
+
 ## Version 0.13.0
 
 - targeting Node 20;
