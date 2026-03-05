@@ -5,7 +5,7 @@
 # Function: normalize()
 
 ```ts
-function normalize(selector: Selector, options: NormalizeOptions): Selector;
+function normalize(selector: Selector, options?: NormalizeOptions): Selector;
 ```
 
 Modifies the given AST **in place** to a canonical form and stable ordering.
